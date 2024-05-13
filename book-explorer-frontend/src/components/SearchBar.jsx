@@ -1,14 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { fetchData } from "../utils/api";
 import styles from "./SearchBar.module.css";
 import Spinner from "./Spinner";
+import MatchingText from "./MatchingText";
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchBy, setSearchBy] = useState("Title");
   const [searchResults, setSearchResults] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  console.log(`this is page ${page}`);
+  const [showSuggestions, setShowSuggestions] = useState(true);
+  const dropDownRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropDownRef.current.contains(event.target)) {
+        setShowSuggestions(true);
+      } else {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   useEffect(() => {
     const timeoutId = setTimeout(async () => {
       setLoading(true);
@@ -25,7 +41,7 @@ function SearchBar() {
     }, 500);
 
     return () => clearTimeout(timeoutId); // Cleanup function to clear the timeout
-  }, [searchTerm, page]);
+  }, [searchTerm, page, searchBy]);
 
   const handleChange = (value) => {
     setSearchTerm(value);
@@ -35,13 +51,13 @@ function SearchBar() {
     setSearchTerm(value);
   };
 
-  const handlePage = () => {
-    const nextPage = page + 1;
-    setPage(nextPage);
+  const handlePage = (e) => {
+    e.stopPropagation();
+    setPage(page + 1);
   };
 
   return (
-    <div className={styles.autocomplete}>
+    <div ref={dropDownRef} className={styles.autocomplete}>
       <input
         className={`${styles.inputField}`}
         type="text"
@@ -56,26 +72,33 @@ function SearchBar() {
         <option value="Publisher">Publisher</option>
       </select>
       <button>Search</button>
-      {loading ? (
-        <ul className={styles.suggestions}>
-          <Spinner></Spinner>
-        </ul>
-      ) : (
-        <ul className={styles.suggestions}>
-          {searchResults.map((result, index) => (
-            <li onClick={() => handleListClick(result)} key={index}>
-              {result}
-            </li>
-          ))}
-          {searchResults.length !== 0 ? (
-            <li key={`nextButton${page}`} onClick={() => handlePage()}>
-              Load More Suggestions
-            </li>
-          ) : (
-            <li>No More Suggestions</li>
-          )}
-        </ul>
-      )}
+      {showSuggestions &&
+        (loading ? (
+          <ul className={styles.suggestions}>
+            <Spinner></Spinner>
+          </ul>
+        ) : (
+          <ul
+            onMouseDown={(e) => e.stopPropagation()}
+            className={styles.suggestions}
+          >
+            {searchResults.map((result, index) => (
+              <MatchingText
+                suggestion={result}
+                userInput={searchTerm}
+                key={index}
+                handleClick={handleListClick}
+              ></MatchingText>
+            ))}
+            {searchResults.length !== 0 ? (
+              <li key={`nextButton${page}`} onClick={(e) => handlePage(e)}>
+                Load More Suggestions
+              </li>
+            ) : (
+              <li>No More Suggestions</li>
+            )}
+          </ul>
+        ))}
     </div>
   );
 }

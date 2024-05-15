@@ -1,0 +1,28 @@
+.book-cell {
+  position: relative; /* Ensure relative positioning for absolute positioning of background image */
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure background image covers entire container */
+  height: 100%; /* Ensure background image covers entire container */
+  background-size: cover; /* Cover entire container without distortion */
+  background-position: center; /* Center the background image */
+  background-image: url("images/background_gray.jpg");
+  z-index: -1;
+  border-radius: 2px;
+}
+
+.book-cover {
+  width: 100%; /* Ensure cover image fills entire container */
+  height: 100%; /* Ensure cover image fills entire container */
+  object-fit: cover; /* Cover entire container without distortion */
+  border-radius: 4px;
+  transition: 0.1s;
+}
+
+.book-cover:hover {
+  scale: 1.05;
+}

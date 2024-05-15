@@ -3,6 +3,7 @@ import { fetchData } from "../utils/api";
 import styles from "./SearchBar.module.css";
 import Spinner from "./Spinner";
 import MatchingText from "./MatchingText";
+import SearchButton from "./SearchButton";
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchBy, setSearchBy] = useState("Title");
@@ -11,10 +12,15 @@ function SearchBar() {
   const [loading, setLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const dropDownRef = useRef(null);
+  const searchButtonRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropDownRef.current.contains(event.target)) {
-        setShowSuggestions(true);
+        if (event.target.id === "search-button") {
+          setShowSuggestions(false);
+        } else {
+          setShowSuggestions(true);
+        }
       } else {
         setShowSuggestions(false);
       }
@@ -71,7 +77,7 @@ function SearchBar() {
         <option value="ISBN">ISBN</option>
         <option value="Publisher">Publisher</option>
       </select>
-      <button>Search</button>
+      <SearchButton searchTerm={searchTerm} searchBy={searchBy}></SearchButton>
       {showSuggestions &&
         (loading ? (
           <ul className={styles.suggestions}>

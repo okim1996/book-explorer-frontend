@@ -5,6 +5,8 @@ const initialState = {
   pages: 0,
   totalItems: 0,
   currentPage: 1,
+  category: "",
+  userInput: "",
 };
 
 const booksSlice = createSlice({
@@ -12,11 +14,14 @@ const booksSlice = createSlice({
   initialState,
   reducers: {
     setBooks(state, action) {
-      const { books, pages, totalItems, currentPage } = action.payload;
+      const { books, pages, totalItems, currentPage, category, userInput } =
+        action.payload;
       state.books = books;
       state.pages = pages;
       state.totalItems = totalItems;
       state.currentPage = currentPage;
+      state.category = category;
+      state.userInput = userInput;
     },
   },
 });

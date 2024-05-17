@@ -1,0 +1,14 @@
+.bold {
+  font-weight: bold;
+}
+
+.input-wrong {
+  background-color: rgba(255, 0, 0, 0.273);
+}
+
+.disable-button {
+  cursor: none;
+  pointer-events: none;
+  background-color: rgba(128, 128, 128, 0.292);
+  color: rgba(128, 128, 128, 0.718);
+}

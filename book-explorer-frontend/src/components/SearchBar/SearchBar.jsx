@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { fetchData } from "../utils/api";
+import { fetchData } from "../../utils/api";
 import styles from "./SearchBar.module.css";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 import MatchingText from "./MatchingText";
 import SearchButton from "./SearchButton";
 function SearchBar() {
@@ -11,12 +11,15 @@ function SearchBar() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [pressedEnter, setPressedEnter] = useState(false);
   const dropDownRef = useRef(null);
   const searchButtonRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropDownRef.current.contains(event.target)) {
         if (event.target.id === "search-button") {
+          setShowSuggestions(false);
+        } else if (event.key === "Enter") {
           setShowSuggestions(false);
         } else {
           setShowSuggestions(true);
@@ -26,8 +29,10 @@ function SearchBar() {
       }
     };
     document.addEventListener("click", handleClickOutside);
+    document.addEventListener("keypress", handleClickOutside);
     return () => {
       document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("keypress", handleClickOutside);
     };
   }, []);
 
@@ -61,6 +66,9 @@ function SearchBar() {
     e.stopPropagation();
     setPage(page + 1);
   };
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") setPressedEnter(true);
+  };
 
   return (
     <div ref={dropDownRef} className={styles.autocomplete}>
@@ -70,6 +78,7 @@ function SearchBar() {
         placeholder={`Search By ${searchBy}`}
         value={searchTerm}
         onChange={(e) => handleChange(e.target.value)}
+        onKeyPress={(event) => handleKeyPress(event)}
       />
       <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
         <option value="Title">Title</option>
@@ -77,7 +86,12 @@ function SearchBar() {
         <option value="ISBN">ISBN</option>
         <option value="Publisher">Publisher</option>
       </select>
-      <SearchButton searchTerm={searchTerm} searchBy={searchBy}></SearchButton>
+      <SearchButton
+        pressedEnter={pressedEnter}
+        setPressedEnter={setPressedEnter}
+        searchTerm={searchTerm}
+        searchBy={searchBy}
+      ></SearchButton>
       {showSuggestions &&
         (loading ? (
           <ul className={styles.suggestions}>

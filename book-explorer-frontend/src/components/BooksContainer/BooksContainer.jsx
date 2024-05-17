@@ -5,7 +5,8 @@ import styles from "./BooksContainer.module.css";
 function BooksContainer() {
   // Access the state from the Redux Store
   const booksState = useSelector((state) => state.books);
-
+  for (const key in booksState) {
+  }
   // Log the state to the console for now
   return (
     <div className={styles["books-container"]}>

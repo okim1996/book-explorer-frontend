@@ -23,9 +23,19 @@ const booksSlice = createSlice({
       state.category = category;
       state.userInput = userInput;
     },
+    setPage(state, action) {
+      const { books, pages, totalItems, currentPage, category, userInput } =
+        state;
+      state.books = action.payload.books;
+      state.pages = pages;
+      state.totalItems = totalItems;
+      state.currentPage = action.payload.newPage;
+      state.category = category;
+      state.userInput = userInput;
+    },
   },
 });
 
-export const { setBooks } = booksSlice.actions;
+export const { setBooks, setPage } = booksSlice.actions;
 
 export default booksSlice.reducer;

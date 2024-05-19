@@ -6,6 +6,7 @@ function BooksContainer() {
   // Access the state from the Redux Store
   const booksState = useSelector((state) => state.books);
   for (const key in booksState) {
+    console.log(`bookscontainer ${key}:${booksState[key]}`);
   }
   // Log the state to the console for now
   return (

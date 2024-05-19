@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { fetchData } from "../../utils/api";
+import { useDispatch } from "react-redux";
+import { setBooks } from "../../store/booksSlice";
+
 import styles from "./SearchBar.module.css";
 import Spinner from "../Spinner";
 import MatchingText from "./MatchingText";
@@ -9,6 +12,7 @@ function SearchBar() {
   const [searchBy, setSearchBy] = useState("Title");
   const [searchResults, setSearchResults] = useState([]);
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [pressedEnter, setPressedEnter] = useState(false);
@@ -66,8 +70,41 @@ function SearchBar() {
     e.stopPropagation();
     setPage(page + 1);
   };
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") setPressedEnter(true);
+  const handleKeyPress = async (event) => {
+    if (event.key === "Enter") {
+      try {
+        // Construct the URL based on the searchTerm and searchBy
+        const url = `http://127.0.0.1:8000/api/books/search?q=${
+          searchBy === "ISBN" ? "" : "in"
+        }${searchBy.toLowerCase()}:${searchTerm}`;
+
+        // Send a GET request to the back-end
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+
+        for (const key in data) {
+          console.log(`searchbutton : ${key} : ${data[key]}`);
+        }
+        // Update the redux store with the received data
+        dispatch(
+          setBooks({
+            ...data,
+            currentPage: 1,
+            category: searchBy,
+            userInput: searchTerm,
+          })
+        );
+      } catch (error) {
+        // Handle errors here
+        console.log("There was a problem with the fetch operation", error);
+      }
+    }
   };
 
   return (

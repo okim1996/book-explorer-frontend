@@ -1,6 +1,6 @@
 import styles from "./PaginationBar.module.css";
 function PaginationRow({
-  totalPages,
+  pages,
   currentPage,
   setCurrentPage,
   inputValue,
@@ -12,7 +12,7 @@ function PaginationRow({
   const value = set * 4 + remainder;
   let pagesRow = [];
   for (let i = 1; i <= 4; i++) {
-    if (set * 4 + i <= totalPages) pagesRow.push(set * 4 + i);
+    if (set * 4 + i <= pages) pagesRow.push(set * 4 + i);
   }
 
   const handleClickPage = (event) => {

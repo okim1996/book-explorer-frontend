@@ -7,20 +7,10 @@ function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
   const handleClick = async () => {
     try {
       // Construct the URL based on the searchTerm and searchBy
-      if (searchBy === "Title") {
-        searchBy = "intitle:";
-      }
-      if (searchBy === "Author") {
-        searchBy = "inauthor:";
-      }
-      if (searchBy === "ISBN") {
-        searchBy = "isbn:";
-      }
-      if (searchBy === "Publisher") {
-        searchBy = "inpublisher:";
-      }
-      const url = `http://127.0.0.1:8000/api/books/search?q=${searchBy}${searchTerm}`;
-      console.log(`this is the url from searchbutton ${url}`);
+
+      const url = `http://127.0.0.1:8000/api/books/search?q=${
+        searchBy === "ISBN" ? "" : "in"
+      }${searchBy.toLowerCase()}:${searchTerm}`;
 
       // Send a GET request to the back-end
 
@@ -51,7 +41,7 @@ function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
       console.log("There was a problem with the fetch operation", error);
     }
   };
-  if (pressedEnter) handleClick();
+  // if (pressedEnter) handleClick();
   return (
     <button id="search-button" className={styles.button} onClick={handleClick}>
       Search

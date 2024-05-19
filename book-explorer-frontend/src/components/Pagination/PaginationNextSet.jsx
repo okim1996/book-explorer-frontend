@@ -1,5 +1,5 @@
 function PaginationPrevSet({
-  totalPages,
+  pages,
   currentPage,
   setCurrentPage,
   setInputValue,
@@ -7,20 +7,20 @@ function PaginationPrevSet({
   const set = Math.ceil(currentPage / 4) - 1;
 
   const handleClick = () => {
-    const amount = totalPages - currentPage >= 4 ? 4 : totalPages - currentPage;
+    const amount = pages - currentPage >= 4 ? 4 : pages - currentPage;
     setCurrentPage(currentPage + amount);
     setInputValue(currentPage + amount);
   };
   const handleLastPage = () => {
-    setCurrentPage(totalPages);
-    setInputValue(totalPages);
+    setCurrentPage(pages);
+    setInputValue(pages);
   };
   return (
     <div>
-      {totalPages - set * 4 > 4 ? (
+      {pages - set * 4 > 4 ? (
         <>
           <p onClick={() => handleClick()}>. . .</p>
-          <p onClick={() => handleLastPage()}>{totalPages}</p>
+          <p onClick={() => handleLastPage()}>{pages}</p>
         </>
       ) : (
         ""

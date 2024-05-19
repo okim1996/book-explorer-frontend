@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
-import { setBooks } from "../../store/booksSlice";
+import { setPage } from "../../store/booksSlice";
 import { fetchData } from "../../utils/api";
 import PaginationPrev from "./PaginationPrev";
 import PaginationNext from "./PaginationNext";
@@ -8,76 +8,66 @@ import PaginationPrevSet from "./PaginationPrevSet";
 import PaginationNextSet from "./PaginationNextSet";
 import PaginationRow from "./PaginationRow";
 import styles from "./PaginationBar.module.css";
+import { current } from "@reduxjs/toolkit";
 
 function PaginationBar() {
   // Access the state from the Redux Store
-  const {
-    pages: totalPages,
-    category,
-    userInput,
-  } = useSelector((state) => state.books);
+  const store = useSelector((state) => state.books);
   const [inputValue, setInputValue] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [allowSubmit, setAllowSubmit] = useState(false);
   const dispatch = useDispatch();
-  const isInitialMount = useRef(true);
-
-  const url = `http://127.0.0.1:8000/api/books/search?q=${category}${userInput}`;
-  console.log(`this is the url from pagination bar ${url}`);
-
+  for (const key in store) {
+    console.log(`this is from paginationbar ${key}: ${store[key]}`);
+  }
   useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      // Your effect code here
-      const timeoutId = setTimeout(async () => {
-        try {
+    if (store.category !== "") {
+      try {
+        async function retrieve() {
+          const url = `http://127.0.0.1:8000/api/books/search?q=${
+            store.category === "ISBN" ? "" : "in"
+          }${store.category.toLowerCase()}:${
+            store.userInput
+          }&pageNumber=${currentPage}`;
+          console.log(url);
           const response = await fetch(url);
           const data = await response.json();
-          for (const key in data) {
-            console.log(`paginationbar : ${key} : ${data[key]}`);
-          }
-          // dispatch(
-          //   setBooks({
-          //     ...data,
-          //     currentPage: currentPage,
-          //     category: category,
-          //     userInput: userInput,
-          //   })
-          // );
-        } catch (error) {
-          console.log(error);
+          dispatch(
+            setPage({
+              books: data.books,
+              newPage: currentPage,
+            })
+          );
         }
-      }, 300);
-
-      return () => clearTimeout(timeoutId); // Cleanup function to clear the timeout
+        retrieve();
+        console.log(`this is the current page ${currentPage}`);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }, [currentPage]);
 
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(async () => {
+  // useEffect(async () => {
+  //   if (store.category !== "") {
   //     try {
-  //       const endpoint = `http://127.0.0.1:8000/api/books/search/?q=${category}${userInput}&pageNumber=${currentPage}`;
-  //       console.log(`this is the endpoint from paginationbar ${endpoint}`);
-  //       const response = await fetch(endpoint);
+  //       const url = `http://127.0.0.1:8000/api/books/search?q=${
+  //         store.category === "ISBN" ? "" : "in"
+  //       }${store.category.toLowerCase()}:${store.userInput}&pageNumber=${
+  //         store.currentPage
+  //       }`;
+  //       console.log(url);
+  //       const response = await fetch(url);
   //       const data = await response.json();
-  //       for (const key in data) {
-  //         console.log(`paginationbar : ${key} : ${data[key]}`);
-  //       }
   //       dispatch(
-  //         setBooks({
-  //           ...data,
-  //           currentPage: currentPage,
-  //           category: category,
-  //           userInput: userInput,
+  //         setPage({
+  //           books: data.books,
+  //           newPage: currentPage,
   //         })
   //       );
   //     } catch (error) {
   //       console.log(error);
   //     }
-  //   }, 300);
-
-  //   return () => clearTimeout(timeoutId); // Cleanup function to clear the timeout
+  //   }
   // }, [currentPage]);
 
   const handleInputChange = (event) => {
@@ -92,7 +82,7 @@ function PaginationBar() {
   };
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      if (inputValue > 0 && inputValue <= totalPages) {
+      if (inputValue > 0 && inputValue <= store.pages) {
         setCurrentPage(Number(inputValue));
         setInputValue(Number(inputValue));
       }
@@ -101,7 +91,7 @@ function PaginationBar() {
 
   return (
     <>
-      {totalPages === 0 ? (
+      {store.pages === 0 ? (
         <div></div>
       ) : (
         <div>
@@ -121,16 +111,16 @@ function PaginationBar() {
             inputValue={inputValue}
             setCurrentPage={setCurrentPage}
             setInputValue={setInputValue}
-            totalPages={totalPages}
+            pages={store.pages}
           ></PaginationRow>
           <PaginationNextSet
-            totalPages={totalPages}
+            pages={store.pages}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             setInputValue={setInputValue}
           ></PaginationNextSet>
           <PaginationNext
-            totalPages={totalPages}
+            pages={store.pages}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             inputValue={inputValue}
@@ -138,7 +128,7 @@ function PaginationBar() {
           ></PaginationNext>
           <input
             className={`${
-              inputValue > 0 && inputValue <= totalPages
+              inputValue > 0 && inputValue <= store.pages
                 ? ""
                 : styles["input-wrong"]
             }`}
@@ -149,10 +139,10 @@ function PaginationBar() {
             placeholder="Enter a number..."
             pattern="[0-9]*"
           />
-          / {totalPages}
+          / {store.pages}
           <button
             className={`${
-              inputValue > 0 && inputValue <= totalPages
+              inputValue > 0 && inputValue <= store.pages
                 ? ""
                 : styles["disable-button"]
             }`}

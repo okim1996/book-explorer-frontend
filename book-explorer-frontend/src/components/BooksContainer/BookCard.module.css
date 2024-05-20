@@ -1,5 +1,10 @@
 .book-cell {
   position: relative; /* Ensure relative positioning for absolute positioning of background image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: opacity 0.3s ease;
 }
 
 .background-image {
@@ -26,3 +31,11 @@
 .book-cover:hover {
   scale: 1.05;
 }
+/* 
+.main-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: opacity 0.3s ease;
+} */

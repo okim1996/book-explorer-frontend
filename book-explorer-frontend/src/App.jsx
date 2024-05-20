@@ -4,13 +4,16 @@ import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import BooksContainer from "./components/BooksContainer/BooksContainer";
 import PaginationBar from "./components/Pagination/PaginationBar";
+import LoadMore from "./components/LoadMore";
 function App() {
-  const booksState = useSelector((state) => state.books);
+  const store = useSelector((state) => state.books);
+
   return (
     <div>
       <SearchBar></SearchBar>
-      {booksState?.books && <BooksContainer></BooksContainer>}
-      {booksState?.books && <PaginationBar></PaginationBar>}
+      {store.userInput !== "" && <BooksContainer></BooksContainer>}
+      {store.books.length !== 0 && <PaginationBar></PaginationBar>}
+      {store.books.length !== 0 && <LoadMore></LoadMore>}
     </div>
   );
 }

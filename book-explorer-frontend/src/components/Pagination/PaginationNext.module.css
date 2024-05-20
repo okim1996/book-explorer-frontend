@@ -1,0 +1,6 @@
+.disable-button {
+  cursor: none;
+  pointer-events: none;
+  background-color: rgba(128, 128, 128, 0.292);
+  color: rgba(128, 128, 128, 0.718);
+}

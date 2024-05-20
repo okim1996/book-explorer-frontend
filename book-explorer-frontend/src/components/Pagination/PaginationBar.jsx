@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
-import { setPage } from "../../store/booksSlice";
+import { setBooks } from "../../store/booksSlice";
 import { fetchData } from "../../utils/api";
 import PaginationPrev from "./PaginationPrev";
 import PaginationNext from "./PaginationNext";
@@ -13,63 +13,14 @@ import { current } from "@reduxjs/toolkit";
 function PaginationBar() {
   // Access the state from the Redux Store
   const store = useSelector((state) => state.books);
-  const [inputValue, setInputValue] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [inputValue, setInputValue] = useState(store.pages);
+  // const [currentPage, setCurrentPage] = useState(1);
   const [allowSubmit, setAllowSubmit] = useState(false);
   const dispatch = useDispatch();
-  for (const key in store) {
-    console.log(`this is from paginationbar ${key}: ${store[key]}`);
-  }
+
   useEffect(() => {
-    if (store.category !== "") {
-      try {
-        async function retrieve() {
-          const url = `http://127.0.0.1:8000/api/books/search?q=${
-            store.category === "ISBN" ? "" : "in"
-          }${store.category.toLowerCase()}:${
-            store.userInput
-          }&pageNumber=${currentPage}`;
-          console.log(url);
-          const response = await fetch(url);
-          const data = await response.json();
-          dispatch(
-            setPage({
-              books: data.books,
-              newPage: currentPage,
-            })
-          );
-        }
-        retrieve();
-        console.log(`this is the current page ${currentPage}`);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [currentPage]);
-
-  // useEffect(async () => {
-  //   if (store.category !== "") {
-  //     try {
-  //       const url = `http://127.0.0.1:8000/api/books/search?q=${
-  //         store.category === "ISBN" ? "" : "in"
-  //       }${store.category.toLowerCase()}:${store.userInput}&pageNumber=${
-  //         store.currentPage
-  //       }`;
-  //       console.log(url);
-  //       const response = await fetch(url);
-  //       const data = await response.json();
-  //       dispatch(
-  //         setPage({
-  //           books: data.books,
-  //           newPage: currentPage,
-  //         })
-  //       );
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // }, [currentPage]);
-
+    setInputValue(store.pages);
+  }, [store.pages]);
   const handleInputChange = (event) => {
     const newValue = event.target.value;
     // Check if the new value matches the number pattern
@@ -78,13 +29,13 @@ function PaginationBar() {
     }
   };
   const handleButtonClick = () => {
-    setCurrentPage(Number(inputValue));
+    dispatch(setBooks({ ...store, currentPage: Number(inputValue) }));
   };
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       if (inputValue > 0 && inputValue <= store.pages) {
-        setCurrentPage(Number(inputValue));
         setInputValue(Number(inputValue));
+        dispatch(setBooks({ ...store, currentPage: Number(inputValue) }));
       }
     }
   };
@@ -96,33 +47,25 @@ function PaginationBar() {
       ) : (
         <div>
           <PaginationPrev
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            store={store}
             inputValue={inputValue}
             setInputValue={setInputValue}
           ></PaginationPrev>
           <PaginationPrevSet
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            store={store}
             setInputValue={setInputValue}
           ></PaginationPrevSet>
           <PaginationRow
-            currentPage={currentPage}
+            store={store}
             inputValue={inputValue}
-            setCurrentPage={setCurrentPage}
             setInputValue={setInputValue}
-            pages={store.pages}
           ></PaginationRow>
           <PaginationNextSet
-            pages={store.pages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            store={store}
             setInputValue={setInputValue}
           ></PaginationNextSet>
           <PaginationNext
-            pages={store.pages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            store={store}
             inputValue={inputValue}
             setInputValue={setInputValue}
           ></PaginationNext>

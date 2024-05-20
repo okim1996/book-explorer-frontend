@@ -1,17 +1,17 @@
-import styles from "./PaginationBar.module.css";
-function PaginationPrev({
-  currentPage,
-  setCurrentPage,
-  inputValue,
-  setInputValue,
-}) {
+import { useDispatch } from "react-redux";
+import styles from "./PaginationPrev.module.css";
+import { setBooks } from "../../store/booksSlice";
+function PaginationPrev({ store, inputValue, setInputValue }) {
+  const dispatch = useDispatch();
   const handlePrev = () => {
-    setCurrentPage(Number(currentPage - 1));
-    setInputValue(Number(currentPage - 1));
+    setInputValue(Number(store.currentPage - 1));
+    dispatch(
+      setBooks({ ...store, currentPage: Number(store.currentPage - 1) })
+    );
   };
   return (
     <button
-      className={`${currentPage === 1 ? styles["disable-button"] : ""}`}
+      className={`${store.currentPage === 1 ? styles["disable-button"] : ""}`}
       onClick={() => handlePrev()}
     >
       Previous

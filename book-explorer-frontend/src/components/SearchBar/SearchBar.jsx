@@ -81,25 +81,22 @@ function SearchBar() {
         // Send a GET request to the back-end
 
         const response = await fetch(url);
-
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
 
         const data = await response.json();
-
-        for (const key in data) {
-          console.log(`searchbutton : ${key} : ${data[key]}`);
-        }
+        const payload = {
+          books: data.books,
+          pages: 1,
+          totalItems: 36,
+          currentPage: 1,
+          category: searchBy,
+          userInput: searchTerm,
+          noMore: false,
+        };
         // Update the redux store with the received data
-        dispatch(
-          setBooks({
-            ...data,
-            currentPage: 1,
-            category: searchBy,
-            userInput: searchTerm,
-          })
-        );
+        dispatch(setBooks(payload));
       } catch (error) {
         // Handle errors here
         console.log("There was a problem with the fetch operation", error);

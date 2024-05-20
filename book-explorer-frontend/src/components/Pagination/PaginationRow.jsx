@@ -1,23 +1,22 @@
-import styles from "./PaginationBar.module.css";
-function PaginationRow({
-  pages,
-  currentPage,
-  setCurrentPage,
-  inputValue,
-  setInputValue,
-}) {
-  const set = Math.ceil(currentPage / 4) - 1;
-  let remainder = currentPage % 4;
+import { useDispatch } from "react-redux";
+import styles from "./PaginationRow.module.css";
+import { setBooks } from "../../store/booksSlice";
+function PaginationRow({ store, inputValue, setInputValue }) {
+  const dispatch = useDispatch();
+  const set = Math.ceil(store.currentPage / 4) - 1;
+  let remainder = store.currentPage % 4;
   if (remainder === 0) remainder = 4;
   const value = set * 4 + remainder;
   let pagesRow = [];
   for (let i = 1; i <= 4; i++) {
-    if (set * 4 + i <= pages) pagesRow.push(set * 4 + i);
+    if (set * 4 + i <= store.pages) pagesRow.push(set * 4 + i);
   }
 
   const handleClickPage = (event) => {
-    setCurrentPage(Number(event.target.innerHTML));
     setInputValue(Number(event.target.innerHTML));
+    dispatch(
+      setBooks({ ...store, currentPage: Number(event.target.innerHTML) })
+    );
   };
 
   return (

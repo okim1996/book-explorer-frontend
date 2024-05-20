@@ -1,3 +1,4 @@
+import BookOverlayCard from "./BookOverlayCard";
 import styles from "./BookCard.module.css";
 function BookCard({ bookInfo }) {
   const imageLink = bookInfo.volumeInfo?.imageLinks?.thumbnail;
@@ -13,6 +14,7 @@ function BookCard({ bookInfo }) {
             : bookInfo.volumeInfo.title
         }
       />
+      <BookOverlayCard bookInfo={bookInfo}></BookOverlayCard>
     </div>
   );
 }

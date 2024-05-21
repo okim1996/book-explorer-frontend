@@ -3,7 +3,7 @@ function BookOverlayCard({ bookInfo }) {
   console.log(bookInfo);
   return (
     <div className={styles.overlay}>
-      <p>{bookInfo.volumeInfo.title}</p>
+      <p className={styles.text}>{bookInfo.volumeInfo.title}</p>
       <button>View</button>
     </div>
   );

@@ -10,7 +10,7 @@ function BookHeading({ bookInfo }) {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <h4>{bookInfo.volumeInfo.title}</h4>
       <p>{`by ${authors === undefined ? "N/A" : authorsString}`}</p>
     </div>

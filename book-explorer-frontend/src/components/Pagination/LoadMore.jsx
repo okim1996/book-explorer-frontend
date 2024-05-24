@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setBooks } from "../store/booksSlice";
+import { setBooks } from "../../store/booksSlice";
 import styles from "./LoadMore.module.css";
 function LoadMore() {
   const store = useSelector((state) => state.books);

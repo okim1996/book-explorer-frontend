@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
 
 import styles from "./SearchBar.module.css";
-import Spinner from "../Spinner";
+import Spinner from "../UI/Spinner";
 import MatchingText from "./MatchingText";
 import SearchButton from "./SearchButton";
 function SearchBar() {
@@ -14,7 +14,7 @@ function SearchBar() {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [pressedEnter, setPressedEnter] = useState(false);
   const dropDownRef = useRef(null);
   const searchButtonRef = useRef(null);
@@ -81,6 +81,7 @@ function SearchBar() {
         // Send a GET request to the back-end
 
         const response = await fetch(url);
+        response;
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

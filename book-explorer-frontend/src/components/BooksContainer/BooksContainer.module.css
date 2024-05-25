@@ -1,8 +1,15 @@
+.main-container {
+  width: 100%; /* Full width of the parent container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .books-container {
   display: grid;
-  grid-template-columns: repeat(6, 150px); /* 6 columns */
-  grid-gap: 20px; /* Adjust the gap between columns */
-  width: 80%; /* 80% of the screen width */
+  grid-template-columns: repeat(6, 1fr); /* 6 columns */
+  grid-gap: 10px; /* Adjust the gap between columns */
+  width: 100%; /* 80% of the screen width */
   margin: 0 auto; /* Center the container horizontally */
   justify-content: center; /* Center grid items horizontally */
 }

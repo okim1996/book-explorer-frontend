@@ -15,7 +15,7 @@ function BooksContainer() {
   }, [store.currentPage]);
   if (store.userInput === "") return <div>Please Enter A Non-Empty Query</div>;
   return (
-    <div>
+    <div className={styles["main-container"]}>
       {store.books.length !== 0 ? (
         <>
           <div className={styles["books-container"]}>

@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.horizontal-line {
+  width: 100vw;
+  margin: 0;
+  border: none;
+  height: 0.2px;
+  background-color: rgba(0, 0, 0, 0.092);
+}

@@ -1,14 +1,24 @@
 /* Autocomplete.module.css */
 .autocomplete {
   position: relative;
+  width: 100%; /* Full width of the parent container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-field {
-  width: 100%;
+  /* width: 40%; */
+  flex: 1;
+
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.search-by {
+  cursor: pointer;
 }
 
 .suggestions {
@@ -36,4 +46,15 @@
 
 .suggestions li:hover {
   background-color: #f0f0f0;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* max-width: 600px; */
+  margin: 0 auto;
+  /* border: 2px solid #ccc; */
+  /* border-radius: 4px; */
+  overflow: hidden;
 }

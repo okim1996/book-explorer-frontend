@@ -107,20 +107,26 @@ function SearchBar() {
 
   return (
     <div ref={dropDownRef} className={styles.autocomplete}>
-      <input
-        className={`${styles.inputField}`}
-        type="text"
-        placeholder={`Search By ${searchBy}`}
-        value={searchTerm}
-        onChange={(e) => handleChange(e.target.value)}
-        onKeyPress={(event) => handleKeyPress(event)}
-      />
-      <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
-        <option value="Title">Title</option>
-        <option value="Author">Author</option>
-        <option value="ISBN">ISBN</option>
-        <option value="Publisher">Publisher</option>
-      </select>
+      <div className={styles["search-bar"]}>
+        <input
+          className={`${styles["input-field"]}`}
+          type="text"
+          placeholder={`Search By ${searchBy}`}
+          value={searchTerm}
+          onChange={(e) => handleChange(e.target.value)}
+          onKeyPress={(event) => handleKeyPress(event)}
+        />
+        <select
+          className={styles["search-by"]}
+          value={searchBy}
+          onChange={(e) => setSearchBy(e.target.value)}
+        >
+          <option value="Title">Title</option>
+          <option value="Author">Author</option>
+          <option value="ISBN">ISBN</option>
+          <option value="Publisher">Publisher</option>
+        </select>
+      </div>
       <SearchButton
         pressedEnter={pressedEnter}
         setPressedEnter={setPressedEnter}

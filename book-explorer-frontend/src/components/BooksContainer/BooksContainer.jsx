@@ -24,7 +24,7 @@ function BooksContainer() {
             ))}
           </div>
           <PaginationBar></PaginationBar>
-          <LoadMore></LoadMore>
+          {/* <LoadMore></LoadMore> */}
         </>
       ) : (
         <div>There Are No Books That Match Your Query</div>

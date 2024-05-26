@@ -16,13 +16,27 @@ function PaginationPrevSet({ store, setInputValue }) {
     <div className={styles.container}>
       {store.currentPage > 4 ? (
         <>
-          <button onClick={() => handleFirstPage()}>1</button>{" "}
-          <button onClick={() => handleClick()}>. . .</button>{" "}
+          <div
+            onClick={() => handleFirstPage()}
+            className={styles["button-container"]}
+          >
+            <span className={styles["button"]}>1</span>{" "}
+          </div>
+          <div
+            onClick={() => handleClick()}
+            className={styles["button-container"]}
+          >
+            <span className={styles["button"]}>. . .</span>{" "}
+          </div>
         </>
       ) : (
         <>
-          <button className={styles.hidden}>1</button>
-          <button className={styles.hidden}>. . .</button>
+          <div className={`${styles.hidden} ${styles["button-container"]}`}>
+            <span className={styles.button}>1</span>
+          </div>
+          <div className={`${styles.hidden} ${styles["button-container"]}`}>
+            <span className={styles.button}>. . .</span>
+          </div>
         </>
       )}
     </div>

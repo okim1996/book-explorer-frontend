@@ -7,6 +7,7 @@ import PaginationNext from "./PaginationNext";
 import PaginationPrevSet from "./PaginationPrevSet";
 import PaginationNextSet from "./PaginationNextSet";
 import PaginationRow from "./PaginationRow";
+import LoadMore from "./LoadMore";
 import styles from "./PaginationBar.module.css";
 import { current } from "@reduxjs/toolkit";
 
@@ -82,17 +83,20 @@ function PaginationBar() {
             placeholder="Enter a number..."
             pattern="[0-9]*"
           />
-          / {store.pages}
-          <button
-            className={`${
+          <div className={styles.align}>
+            <span>/ {store.pages}</span>
+          </div>
+          <div
+            onClick={handleButtonClick}
+            className={`${styles["button-container"]} ${
               inputValue > 0 && inputValue <= store.pages
                 ? ""
                 : styles["disable-button"]
             }`}
-            onClick={handleButtonClick}
           >
-            Submit
-          </button>
+            <span className={styles.button}>Confirm</span>
+          </div>
+          <LoadMore></LoadMore>
         </div>
       )}
     </>

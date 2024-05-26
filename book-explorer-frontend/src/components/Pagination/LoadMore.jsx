@@ -33,11 +33,19 @@ function LoadMore() {
     }
   };
   return (
-    <div>
+    <div className={styles.container}>
       {store.noMore ? (
-        <button className={styles["disable-button"]}>No More Results</button>
+        <div
+          className={`${styles["button-container"]} ${styles["disable-button"]}`}
+        >
+          <span className={`${styles.button}`}>No More Results</span>
+        </div>
       ) : (
-        <button onClick={() => handleClick()}>Load More Results</button>
+        <div className={styles["button-container"]}>
+          <span className={styles.button} onClick={handleClick}>
+            Load More Results
+          </span>
+        </div>
       )}
     </div>
   );

@@ -23,7 +23,10 @@ function BookOverlayCard({ bookInfo }) {
   return (
     <div className={styles.overlay}>
       <p className={styles.text}>{bookInfo.volumeInfo.title}</p>
-      <button onClick={openModal}>View</button>
+      <div onClick={openModal} className={styles["button-container"]}>
+        <span className={styles.button}>View</span>
+      </div>
+      {/* <button onClick={openModal}>View</button> */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {/* <FixedSizeContainer> */}
         <BookHeading bookInfo={bookInfo}></BookHeading>

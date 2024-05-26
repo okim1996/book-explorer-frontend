@@ -14,10 +14,10 @@ function PaginationRow({ store, inputValue, setInputValue }) {
   }
 
   const handleClickPage = (event) => {
-    setInputValue(Number(event.target.innerHTML));
-    dispatch(
-      setBooks({ ...store, currentPage: Number(event.target.innerHTML) })
-    );
+    const spanElement = event.currentTarget.querySelector("span");
+    const number = Number(spanElement.textContent);
+    setInputValue(number);
+    dispatch(setBooks({ ...store, currentPage: number }));
   };
 
   return (
@@ -25,25 +25,32 @@ function PaginationRow({ store, inputValue, setInputValue }) {
       {pagesRow.map((page, index) => {
         if (page === value) {
           return (
-            <button
-              onClick={(event) => handleClickPage(event)}
+            <div
               key={index}
-              className={styles.bold}
+              onClick={(event) => handleClickPage(event)}
+              className={`${styles.bold} ${styles["button-container"]}`}
             >
-              {page}
-            </button>
+              <span className={styles.button}>{page}</span>
+            </div>
           );
         } else if (page === false) {
           return (
-            <button className={styles.hidden} key={index}>
-              1
-            </button>
+            <div
+              className={`${styles.hidden} ${styles["button-container"]}`}
+              key={index}
+            >
+              <span className={styles.button}>{page}</span>
+            </div>
           );
         } else {
           return (
-            <button onClick={(event) => handleClickPage(event)} key={index}>
-              {page}
-            </button>
+            <div
+              className={`${styles["button-container"]}`}
+              onClick={(event) => handleClickPage(event)}
+              key={index}
+            >
+              <span className={styles.button}>{page}</span>
+            </div>
           );
         }
       })}

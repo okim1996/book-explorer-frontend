@@ -6,6 +6,11 @@
   background-color: rgba(255, 0, 0, 0.273);
 }
 
+.align {
+  display: flex;
+  align-items: center;
+}
+
 .disable-button {
   cursor: none;
   pointer-events: none;
@@ -14,7 +19,30 @@
 }
 
 .pagination-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: row;
   gap: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 40px;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: 0.05s;
+}
+
+.button-container:hover {
+  background-color: #50c878;
+  border-color: #50c878;
+  color: white;
+}
+
+.button {
+  transform-origin: center center;
 }

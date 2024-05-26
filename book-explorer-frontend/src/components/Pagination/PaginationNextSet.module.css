@@ -6,3 +6,24 @@
 .hidden {
   visibility: hidden;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: 0.05s;
+}
+
+.button-container:hover {
+  background-color: #50c878;
+  border-color: #50c878;
+  color: white;
+}
+
+.button {
+  transform-origin: center center;
+}

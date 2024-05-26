@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import styles from "./PaginationPrev.module.css";
-
 import { setBooks } from "../../store/booksSlice";
 function PaginationPrev({ store, inputValue, setInputValue }) {
   const dispatch = useDispatch();
@@ -11,14 +10,14 @@ function PaginationPrev({ store, inputValue, setInputValue }) {
     );
   };
   return (
-    <button
-      className={`${styles["pagination-button"]} ${
+    <div
+      className={`${styles.container} ${
         store.currentPage === 1 ? styles["disable-button"] : ""
       }`}
       onClick={() => handlePrev()}
     >
-      &larr;
-    </button>
+      <span className={styles.arrow}>&lt;</span>
+    </div>
   );
 }
 export default PaginationPrev;

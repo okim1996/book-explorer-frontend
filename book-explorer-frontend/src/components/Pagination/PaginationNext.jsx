@@ -9,14 +9,14 @@ function PaginationNext({ store, inputValue, setInputValue }) {
     dispatch(setBooks({ ...store, currentPage: store.currentPage + 1 }));
   };
   return (
-    <button
-      className={`${
+    <div
+      className={`${styles.container} ${
         store.currentPage === store.pages ? styles["disable-button"] : ""
       }`}
       onClick={() => handleNext()}
     >
-      &rarr;
-    </button>
+      <span className={styles.arrow}>&gt;</span>
+    </div>
   );
 }
 export default PaginationNext;

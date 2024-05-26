@@ -15,7 +15,7 @@ function PaginationNext({ store, inputValue, setInputValue }) {
       }`}
       onClick={() => handleNext()}
     >
-      Next
+      &rarr;
     </button>
   );
 }

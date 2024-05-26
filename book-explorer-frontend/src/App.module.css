@@ -1,0 +1,12 @@
+.main-application-container {
+  width: 80vw;
+  /* margin: 0 auto;
+  padding-top: 0;
+  /* gap: 10px; */
+}
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}

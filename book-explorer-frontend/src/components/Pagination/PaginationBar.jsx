@@ -45,7 +45,7 @@ function PaginationBar() {
       {store.pages === 0 ? (
         <div></div>
       ) : (
-        <div>
+        <div className={styles["pagination-container"]}>
           <PaginationPrev
             store={store}
             inputValue={inputValue}

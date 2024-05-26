@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+  background-image: url("images/library-image.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}

@@ -10,6 +10,7 @@ function PaginationRow({ store, inputValue, setInputValue }) {
   let pagesRow = [];
   for (let i = 1; i <= 4; i++) {
     if (set * 4 + i <= store.pages) pagesRow.push(set * 4 + i);
+    else pagesRow.push(false);
   }
 
   const handleClickPage = (event) => {
@@ -21,22 +22,28 @@ function PaginationRow({ store, inputValue, setInputValue }) {
 
   return (
     <>
-      {pagesRow.map((page) => {
+      {pagesRow.map((page, index) => {
         if (page === value) {
           return (
-            <p
+            <button
               onClick={(event) => handleClickPage(event)}
-              key={page}
+              key={index}
               className={styles.bold}
             >
               {page}
-            </p>
+            </button>
+          );
+        } else if (page === false) {
+          return (
+            <button className={styles.hidden} key={index}>
+              1
+            </button>
           );
         } else {
           return (
-            <p onClick={(event) => handleClickPage(event)} key={page}>
+            <button onClick={(event) => handleClickPage(event)} key={index}>
               {page}
-            </p>
+            </button>
           );
         }
       })}

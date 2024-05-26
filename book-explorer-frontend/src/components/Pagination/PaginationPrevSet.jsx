@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
+import styles from "./PaginationPrevSet.module.css";
 
 function PaginationPrevSet({ store, setInputValue }) {
   const dispatch = useDispatch();
@@ -12,14 +13,17 @@ function PaginationPrevSet({ store, setInputValue }) {
     dispatch(setBooks({ ...store, currentPage: 1 }));
   };
   return (
-    <div>
+    <div className={styles.container}>
       {store.currentPage > 4 ? (
         <>
-          <p onClick={() => handleFirstPage()}>1</p>{" "}
-          <p onClick={() => handleClick()}>. . .</p>{" "}
+          <button onClick={() => handleFirstPage()}>1</button>{" "}
+          <button onClick={() => handleClick()}>. . .</button>{" "}
         </>
       ) : (
-        ""
+        <>
+          <button className={styles.hidden}>1</button>
+          <button className={styles.hidden}>. . .</button>
+        </>
       )}
     </div>
   );

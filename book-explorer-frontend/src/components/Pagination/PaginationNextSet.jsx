@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
-
+import styles from "./PaginationNextSet.module.css";
 function PaginationPrevSet({ store, setInputValue }) {
   const dispatch = useDispatch();
   const set = Math.ceil(store.currentPage / 4) - 1;
@@ -18,14 +18,17 @@ function PaginationPrevSet({ store, setInputValue }) {
     dispatch(setBooks({ ...store, currentPage: store.pages }));
   };
   return (
-    <div>
+    <div className={styles.container}>
       {store.pages - set * 4 > 4 ? (
         <>
-          <p onClick={() => handleClick()}>. . .</p>
-          <p onClick={() => handleLastPage()}>{store.pages}</p>
+          <button onClick={() => handleClick()}>. . .</button>
+          <button onClick={() => handleLastPage()}>{store.pages}</button>
         </>
       ) : (
-        ""
+        <>
+          <button className={styles.hidden}></button>
+          <button className={styles.hidden}></button>
+        </>
       )}
     </div>
   );

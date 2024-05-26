@@ -7,15 +7,17 @@ import BooksContainer from "./components/BooksContainer/BooksContainer";
 import PaginationBar from "./components/Pagination/PaginationBar";
 import LoadMore from "./components/Pagination/LoadMore";
 import Title from "./components/UI/Title";
+import SearchSection from "./components/SearchSection/SearchSection";
 function App() {
   const store = useSelector((state) => state.books);
   return (
-    <div className="main-application-container">
-      <Title></Title>
-      <SearchBar></SearchBar>
+    <div className={styles["main-application-container"]}>
+      <div className={styles["search-section"]}>
+        <Title></Title>
+        <SearchSection></SearchSection>
+      </div>
+      {/* <SearchBar></SearchBar> */}
       {!store.category ? <div></div> : <BooksContainer></BooksContainer>}
-      {/* {store.books.length !== 0 && <PaginationBar></PaginationBar>}
-      {store.books.length !== 0 && <LoadMore></LoadMore>} */}
     </div>
   );
 }

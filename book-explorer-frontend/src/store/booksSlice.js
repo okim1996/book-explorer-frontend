@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  clickCounter: 0,
   books: [],
   pages: 0,
   totalItems: 0,
@@ -24,6 +25,7 @@ const booksSlice = createSlice({
         userInput,
         hasData,
         noMore,
+        clickCounter,
       } = action.payload;
       state.books = books;
       state.pages = pages;
@@ -33,6 +35,7 @@ const booksSlice = createSlice({
       state.userInput = userInput;
       state.hasData = hasData;
       state.noMore = noMore;
+      state.clickCounter = clickCounter;
     },
   },
 });

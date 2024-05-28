@@ -14,3 +14,6 @@
   margin: 0 auto; /* Center the container horizontally */
   justify-content: center; /* Center grid items horizontally */
 }
+.hidden {
+  display: none;
+}

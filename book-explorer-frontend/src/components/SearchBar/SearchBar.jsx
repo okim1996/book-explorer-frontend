@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { fetchData } from "../../utils/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
 
 import styles from "./SearchBar.module.css";
@@ -8,6 +8,7 @@ import Spinner from "../UI/Spinner";
 import MatchingText from "./MatchingText";
 import SearchButton from "./SearchButton";
 function SearchBar() {
+  const store = useSelector((state) => state.books);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchBy, setSearchBy] = useState("Title");
   const [searchResults, setSearchResults] = useState([]);
@@ -88,6 +89,7 @@ function SearchBar() {
 
         const data = await response.json();
         const payload = {
+          clickCounter: store.clickCounter + 1,
           books: data.books,
           pages: 1,
           totalItems: 36,
@@ -98,6 +100,12 @@ function SearchBar() {
         };
         // Update the redux store with the received data
         dispatch(setBooks(payload));
+        // const element = document.getElementById("books-container");
+        // const topPosition = element.offsetTop;
+        // window.scrollBy({
+        //   top: window.innerHeight,
+        //   behavior: "smooth",
+        // });
       } catch (error) {
         // Handle errors here
         console.log("There was a problem with the fetch operation", error);

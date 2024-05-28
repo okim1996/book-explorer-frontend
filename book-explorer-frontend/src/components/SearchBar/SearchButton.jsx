@@ -1,8 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
 import styles from "./SearchButton.module.css";
 function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
+  const store = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const handleClick = async () => {
     try {
@@ -21,6 +22,7 @@ function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
 
       const data = await response.json();
       const payload = {
+        clickCounter: store.clickCounter + 1,
         books: data.books,
         pages: 1,
         totalItems: 36,
@@ -32,6 +34,12 @@ function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
       // Update the redux store with the received data
       dispatch(setBooks(payload));
       setPressedEnter(false);
+      // const element = document.getElementById("books-container");
+      // const topPosition = element.offsetTop;
+      // window.scrollBy({
+      //   top: window.innerHeight,
+      //   behavior: "smooth",
+      // });
     } catch (error) {
       // Handle errors here
       setPressedEnter(false);

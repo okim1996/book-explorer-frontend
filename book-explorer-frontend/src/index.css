@@ -21,6 +21,9 @@ a {
 a:hover {
   color: #535bf2;
 }
+html {
+  background-color: orange;
+}
 
 body {
   margin: 0;
@@ -30,7 +33,6 @@ body {
   min-height: 100vh;
   font-family: "Lora", serif;
 }
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

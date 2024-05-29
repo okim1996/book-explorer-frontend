@@ -34,12 +34,12 @@ function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
       // Update the redux store with the received data
       dispatch(setBooks(payload));
       setPressedEnter(false);
-      // const element = document.getElementById("books-container");
-      // const topPosition = element.offsetTop;
-      // window.scrollBy({
-      //   top: window.innerHeight,
-      //   behavior: "smooth",
-      // });
+      const element = document.getElementById("books-container");
+      const topPosition = element.offsetTop;
+      window.scrollTo({
+        top: topPosition,
+        behavior: "smooth", // 'auto' for instant scroll, 'smooth' for smooth scroll
+      });
     } catch (error) {
       // Handle errors here
       setPressedEnter(false);

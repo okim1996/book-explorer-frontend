@@ -100,12 +100,12 @@ function SearchBar() {
         };
         // Update the redux store with the received data
         dispatch(setBooks(payload));
-        // const element = document.getElementById("books-container");
-        // const topPosition = element.offsetTop;
-        // window.scrollBy({
-        //   top: window.innerHeight,
-        //   behavior: "smooth",
-        // });
+        const element = document.getElementById("books-container");
+        const topPosition = element.offsetTop;
+        window.scrollTo({
+          top: topPosition,
+          behavior: "smooth", // 'auto' for instant scroll, 'smooth' for smooth scroll
+        });
       } catch (error) {
         // Handle errors here
         console.log("There was a problem with the fetch operation", error);
@@ -117,6 +117,7 @@ function SearchBar() {
     <div ref={dropDownRef} className={styles.autocomplete}>
       <div className={styles["search-bar"]}>
         <input
+          id="focus-input"
           className={`${styles["input-field"]}`}
           type="text"
           placeholder={`Search By ${searchBy}`}

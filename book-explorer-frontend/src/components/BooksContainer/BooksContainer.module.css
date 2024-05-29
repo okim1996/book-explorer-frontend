@@ -1,19 +1,38 @@
 .main-container {
-  margin-top: 10px;
+  margin-top: 40px;
   width: 100%; /* Full width of the parent container */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100vh;
+  position: relative;
+  overflow-y: visible;
 }
 .books-container {
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 6 columns */
   grid-gap: 10px; /* Adjust the gap between columns */
   width: 100%; /* 80% of the screen width */
   margin: 0 auto; /* Center the container horizontally */
   justify-content: center; /* Center grid items horizontally */
+  box-sizing: border-box;
+  padding: 40px;
+  /* background: linear-gradient(
+    135deg,
+    rgba(255, 167, 38, 0.4),
+    rgba(255, 183, 77, 0.4),
+    rgba(255, 204, 128, 0.4)
+  ); */
 }
 .hidden {
   display: none;
+}
+.scroll-container {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

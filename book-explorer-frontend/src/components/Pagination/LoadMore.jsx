@@ -24,27 +24,32 @@ function LoadMore() {
         endIndex: store.endIndex + 36,
         noMore: data.books.length === 0 ? true : false,
       };
+      console.log(
+        `load more component ${data.books[0]} and ${data.books.length}`
+      );
       if (data.books.length === 0) {
-        payload = { ...store, noMore: true };
+        dispatch(setBooks({ ...store, noMore: true }));
+      } else {
+        dispatch(setBooks(payload));
       }
-      dispatch(setBooks(payload));
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className={styles.container}>
+    <div
+      onClick={handleClick}
+      className={`${styles.container} ${
+        store.noMore ? styles["disable-button"] : ""
+      }`}
+    >
       {store.noMore ? (
-        <div
-          className={`${styles["button-container"]} ${styles["disable-button"]}`}
-        >
+        <div className={`${styles["button-container"]}`}>
           <span className={`${styles.button}`}>No More Results</span>
         </div>
       ) : (
         <div className={styles["button-container"]}>
-          <span className={styles.button} onClick={handleClick}>
-            Load More Results
-          </span>
+          <span className={styles.button}>Load More Results</span>
         </div>
       )}
     </div>

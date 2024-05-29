@@ -7,6 +7,7 @@ import EmptyPage from "../UI/EmptyPage";
 import WrongQuery from "../UI/WrongQuery";
 import { setBooks } from "../../store/booksSlice";
 import styles from "./BooksContainer.module.css";
+import Footer from "../UI/Footer";
 function BooksContainer() {
   // Access the state from the Redux Store
   const store = useSelector((state) => state.books);
@@ -19,7 +20,7 @@ function BooksContainer() {
       top: topPosition,
       behavior: "smooth", // 'auto' for instant scroll, 'smooth' for smooth scroll
     });
-  }, [store.clickCounter]);
+  }, [store.currentPage, store.category, store.userInput]);
   useEffect(() => {
     currentIndex = Math.abs(store.currentPage - 1) * 36;
     endIndex = store.currentPage * 36;
@@ -30,14 +31,14 @@ function BooksContainer() {
   } else {
     if (store.books.length !== 0) {
       output = (
-        <>
+        <div className={styles["scroll-container"]}>
           <div className={styles["books-container"]}>
             {store.books.slice(currentIndex, endIndex).map((book, index) => (
               <BookCard key={index} bookInfo={book}></BookCard>
             ))}
           </div>
           <PaginationBar></PaginationBar>
-        </>
+        </div>
       );
     } else {
       output = <WrongQuery></WrongQuery>;
@@ -50,7 +51,9 @@ function BooksContainer() {
         store.category === "" ? styles.hidden : ""
       }`}
     >
+      {/* <div className={styles["scroll-container"]}></div> */}
       {output}
+      {/* <Footer></Footer> */}
     </div>
   );
 }

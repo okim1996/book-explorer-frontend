@@ -65,8 +65,10 @@ function BookDetails({ bookInfo }) {
     "December",
   ];
 
-  if (dateString.length === 4) {
+  if (dateString?.length === 4) {
     publishedDate = dateString;
+  } else if (dateString === undefined) {
+    publishedDate = "N/A";
   } else {
     let splits = dateString.split("-");
     year = Number(splits[0]);

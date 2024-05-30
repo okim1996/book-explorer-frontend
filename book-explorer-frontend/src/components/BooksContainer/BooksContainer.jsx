@@ -1,3 +1,4 @@
+import SearchBar from "../SearchBar/SearchBar";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BookCard from "./BookCard";
@@ -10,9 +11,58 @@ import styles from "./BooksContainer.module.css";
 import Footer from "../UI/Footer";
 function BooksContainer() {
   // Access the state from the Redux Store
+  const containerRef = useRef(null);
+  const booksRef = useRef(null);
   const store = useSelector((state) => state.books);
+  const [searchYTarget, setSearchYTarget] = useState(10000);
+  const [pageY, setPageY] = useState(0);
+  const [pageBottom, setPageBottom] = useState(0);
+  const [searchBottom, setSearchBottom] = useState(0);
   let currentIndex = Math.abs(store.currentPage - 1) * 36;
   let endIndex = store.currentPage * 36;
+
+  console.log(pageBottom, searchBottom);
+  // determine the top and bottom of the page y position on mousescroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
+      const viewportHeight = window.innerHeight;
+      setPageY(scrollPosition);
+      setPageBottom(scrollPosition + viewportHeight);
+    };
+    // Add the event listener for scroll
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // determine the starting and ending y position of the scrolling-container component
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      const rect = container.getBoundingClientRect();
+      // console.log(`top ${rect.top} , bottom ${rect.bottom}`);
+      const yPosition = rect.top + window.scrollY; // Y position relative to the entire document
+      // console.log("Y Position of the books container is :", yPosition);
+      setSearchYTarget(yPosition);
+    }
+    setTimeout(() => {
+      const booksContainer = booksRef.current;
+      if (booksContainer) {
+        const rect = booksContainer.getBoundingClientRect();
+        const yPosition = rect.bottom + window.scrollY; // Y position relative to the entire document
+        console.log(pageBottom, yPosition);
+        setSearchBottom(yPosition);
+      }
+    }, 300);
+  }, [store.currentPage, store.category, store.userInput]);
+
+  // scroll the page to the books container on search and pagination
   useEffect(() => {
     const element = document.getElementById("books-container");
     const topPosition = element.offsetTop;
@@ -21,6 +71,8 @@ function BooksContainer() {
       behavior: "smooth", // 'auto' for instant scroll, 'smooth' for smooth scroll
     });
   }, [store.currentPage, store.category, store.userInput]);
+
+  // figure out which set of books to render to the container
   useEffect(() => {
     currentIndex = Math.abs(store.currentPage - 1) * 36;
     endIndex = store.currentPage * 36;
@@ -31,11 +83,25 @@ function BooksContainer() {
   } else {
     if (store.books.length !== 0) {
       output = (
-        <div className={styles["scroll-container"]}>
-          <div className={styles["books-container"]}>
+        <div ref={containerRef} className={styles["scroll-container"]}>
+          <div
+            className={`${styles["sticky-search"]} ${
+              pageY >= searchYTarget ? "" : styles.hidden
+            }`}
+          >
+            <SearchBar></SearchBar>
+          </div>
+          <div ref={booksRef} className={styles["books-container"]}>
             {store.books.slice(currentIndex, endIndex).map((book, index) => (
               <BookCard key={index} bookInfo={book}></BookCard>
             ))}
+          </div>
+          <div
+            className={`${styles["sticky-pagination"]} ${
+              pageBottom < searchBottom ? "" : styles.hidden
+            }`}
+          >
+            <PaginationBar></PaginationBar>
           </div>
           <PaginationBar></PaginationBar>
         </div>
@@ -51,9 +117,7 @@ function BooksContainer() {
         store.category === "" ? styles.hidden : ""
       }`}
     >
-      {/* <div className={styles["scroll-container"]}></div> */}
       {output}
-      {/* <Footer></Footer> */}
     </div>
   );
 }

@@ -9,21 +9,27 @@ function LoadMore() {
       const url = `http://127.0.0.1:8000/api/books/search?q=${
         store.category === "ISBN" ? "" : "in"
       }${store.category.toLowerCase()}:${store.userInput}&pageNumber=${
-        store.pages + 1
+        Math.ceil(store.totalItems / 36) + 1
       }`;
       const response = await fetch(url);
       const data = await response.json();
       let payload = {
         books: [...store.books, ...data.books],
-        pages: store.pages + 1,
-        totalItems: store.totalItems + 36,
-        currentPage: store.pages + 1,
+        totalItems: store.totalItems + data.books.length,
+        pages: Math.ceil(
+          (store.totalItems + data.books.length) / store.showNum
+        ),
+        currentPage: Math.ceil(
+          (store.totalItems + data.books.length) / store.showNum
+        ),
         category: store.category,
         userInput: store.userInput,
-        currentIndex: store.currentIndex + 36,
-        endIndex: store.endIndex + 36,
+        currentIndex: store.currentIndex + store.showNum,
+        endIndex: store.endIndex + store.showNum,
         noMore: data.books.length === 0 ? true : false,
+        showNum: store.showNum,
       };
+      console.log(data.books);
       console.log(
         `load more component ${data.books[0]} and ${data.books.length}`
       );

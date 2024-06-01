@@ -1,38 +1,26 @@
 .container {
   display: flex;
   flex-direction: row;
-  gap: 10px;
-}
-.hidden {
-  visibility: hidden;
+  align-items: center;
+  gap: 60px;
 }
 
-.bold {
-  background-color: #50c878;
-  border-color: #50c878;
-  color: white;
-}
-
-.button-container {
-  display: flex;
+.options {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 30px;
   border: 1px solid #000;
   cursor: pointer;
   transition: 0.05s;
+  background-color: white;
+  padding: 8px 12px;
+  text-align: center;
+  line-height: normal;
 }
-
-.button-container:hover {
+.options:hover {
   background-color: #50c878;
   border-color: #50c878;
   color: white;
-}
-
-.button {
-  transform-origin: center center;
 }

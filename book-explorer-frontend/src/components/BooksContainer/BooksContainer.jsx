@@ -9,6 +9,7 @@ import WrongQuery from "../UI/WrongQuery";
 import { setBooks } from "../../store/booksSlice";
 import styles from "./BooksContainer.module.css";
 import Footer from "../UI/Footer";
+import NumberResults from "../Pagination/NumberResults";
 function BooksContainer() {
   // Access the state from the Redux Store
   const containerRef = useRef(null);
@@ -18,10 +19,9 @@ function BooksContainer() {
   const [pageY, setPageY] = useState(0);
   const [pageBottom, setPageBottom] = useState(0);
   const [searchBottom, setSearchBottom] = useState(0);
-  let currentIndex = Math.abs(store.currentPage - 1) * 36;
-  let endIndex = store.currentPage * 36;
+  let currentIndex = Math.abs(store.currentPage - 1) * store.showNum;
+  let endIndex = store.currentPage * store.showNum;
 
-  console.log(pageBottom, searchBottom);
   // determine the top and bottom of the page y position on mousescroll
   useEffect(() => {
     const handleScroll = () => {
@@ -56,11 +56,10 @@ function BooksContainer() {
       if (booksContainer) {
         const rect = booksContainer.getBoundingClientRect();
         const yPosition = rect.bottom + window.scrollY; // Y position relative to the entire document
-        console.log(pageBottom, yPosition);
         setSearchBottom(yPosition);
       }
     }, 300);
-  }, [store.currentPage, store.category, store.userInput]);
+  }, [store.currentPage, store.category, store.userInput, store.showNum]);
 
   // scroll the page to the books container on search and pagination
   useEffect(() => {
@@ -74,8 +73,8 @@ function BooksContainer() {
 
   // figure out which set of books to render to the container
   useEffect(() => {
-    currentIndex = Math.abs(store.currentPage - 1) * 36;
-    endIndex = store.currentPage * 36;
+    currentIndex = Math.abs(store.currentPage - 1) * store.showNum;
+    endIndex = store.currentPage * store.showNum;
   }, [store.currentPage]);
   let output = "";
   if (store.userInput === "") {
@@ -91,6 +90,8 @@ function BooksContainer() {
           >
             <SearchBar></SearchBar>
           </div>
+
+          <NumberResults></NumberResults>
           <div ref={booksRef} className={styles["books-container"]}>
             {store.books.slice(currentIndex, endIndex).map((book, index) => (
               <BookCard key={index} bookInfo={book}></BookCard>
@@ -98,7 +99,7 @@ function BooksContainer() {
           </div>
           <div
             className={`${styles["sticky-pagination"]} ${
-              pageBottom < searchBottom ? "" : styles.hidden
+              pageBottom < searchBottom + 20 ? "" : styles.hidden
             }`}
           >
             <PaginationBar></PaginationBar>

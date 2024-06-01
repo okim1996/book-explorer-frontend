@@ -26,4 +26,7 @@
   transform: scale(0.6, 1.2) translateY(-1.5px); /* Adjust the scaling here */
   transform-origin: center center;
   font-weight: 500;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }

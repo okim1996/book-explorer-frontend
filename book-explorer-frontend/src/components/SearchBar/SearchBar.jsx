@@ -19,6 +19,10 @@ function SearchBar() {
   const [pressedEnter, setPressedEnter] = useState(false);
   const dropDownRef = useRef(null);
   const searchButtonRef = useRef(null);
+
+  useEffect(() => {
+    setSearchTerm(store.userInput);
+  }, [store.userInput]);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropDownRef.current.contains(event.target)) {
@@ -92,10 +96,11 @@ function SearchBar() {
           clickCounter: store.clickCounter + 1,
           books: data.books,
           pages: 1,
-          totalItems: 36,
+          totalItems: data.books.length,
           currentPage: 1,
           category: searchBy,
           userInput: searchTerm,
+          showNum: 36,
           noMore: false,
         };
         // Update the redux store with the received data

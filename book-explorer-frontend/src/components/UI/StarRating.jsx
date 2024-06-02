@@ -20,9 +20,9 @@ const StarRating = ({ rating, reviewCount }) => {
     );
   });
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles["star-container"]}>{stars}</div>
-      <div>{reviewCount} reviews</div>
+      <div>({reviewCount})</div>
     </div>
   );
 };

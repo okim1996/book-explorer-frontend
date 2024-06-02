@@ -1,9 +1,18 @@
 import BookOverlayCard from "./BookOverlayCard";
 import styles from "./BookCard.module.css";
-function BookCard({ bookInfo }) {
-  const imageLink = bookInfo.volumeInfo?.imageLinks?.thumbnail;
+import { useDispatch, useSelector } from "react-redux";
+import { setBooks } from "../../store/booksSlice";
+function BookCard({ index, bookInfo }) {
+  const store = useSelector((state) => state.books);
+  const dispatch = useDispatch();
+  // const imageLink = bookInfo.volumeInfo?.imageLinks?.thumbnail;
+  const imageLink = store.books[index]?.volumeInfo?.imageLinks?.thumbnail;
   return (
-    <div className={styles["book-cell"]}>
+    <div
+      className={`${styles["book-cell"]} ${
+        store.highlightCard === index ? styles.highlight : ""
+      }`}
+    >
       <div className={styles["background-image"]}></div>
       <img
         className={styles["book-cover"]}
@@ -14,7 +23,7 @@ function BookCard({ bookInfo }) {
             : bookInfo.volumeInfo.title
         }
       />
-      <BookOverlayCard bookInfo={bookInfo}></BookOverlayCard>
+      <BookOverlayCard index={index} bookInfo={bookInfo}></BookOverlayCard>
     </div>
   );
 }

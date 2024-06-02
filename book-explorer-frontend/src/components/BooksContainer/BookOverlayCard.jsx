@@ -1,14 +1,21 @@
 import { useState } from "react";
 import Modal from "../UI/Modal";
+import BookView from "../BookView/BookView";
 import StarRating from "../UI/StarRating";
 import BookHeading from "../BookView/BookHeading";
 import BookCover from "../BookView/BookCover";
 import BookDetails from "../BookView/BookDetails";
 import BookDescription from "../BookView/BookDescription";
+
 import styles from "./BookOverlayCard.module.css";
-function BookOverlayCard({ bookInfo }) {
+import { useDispatch, useSelector } from "react-redux";
+import { setBooks } from "../../store/booksSlice";
+function BookOverlayCard({ index, bookInfo }) {
+  const store = useSelector((state) => state.books);
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
+    // dispatch(setBooks({ ...store, highlightCard: index }));
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -19,7 +26,6 @@ function BookOverlayCard({ bookInfo }) {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  // console.log(`${dateString} : ${typeof dateString}`);
   return (
     <div className={styles.overlay}>
       <p className={styles.text}>{bookInfo.volumeInfo.title}</p>
@@ -27,15 +33,8 @@ function BookOverlayCard({ bookInfo }) {
         <span className={styles.button}>View</span>
       </div>
       {/* <button onClick={openModal}>View</button> */}
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {/* <FixedSizeContainer> */}
-        <BookHeading bookInfo={bookInfo}></BookHeading>
-        <div className={styles["middle-row"]}>
-          <BookCover bookInfo={bookInfo}></BookCover>
-          <BookDetails bookInfo={bookInfo}></BookDetails>
-        </div>
-        <BookDescription bookInfo={bookInfo}></BookDescription>
-        {/* </FixedSizeContainer> */}
+      <Modal index={index} isOpen={isModalOpen} onClose={closeModal}>
+        {/* <BookView index={index}></BookView> */}
       </Modal>
     </div>
   );

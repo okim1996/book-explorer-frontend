@@ -1,3 +1,21 @@
 .container {
-  border: 1px solid black;
+  width: 100%;
+}
+.details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: start;
+}
+.text {
+  margin-top: 0%;
+  margin-bottom: 4px;
+}
+
+.right-portion {
+  margin-left: 40px;
+}
+.title {
+  margin-top: 0%;
+  margin-bottom: 4px;
 }

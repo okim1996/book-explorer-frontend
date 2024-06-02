@@ -1,7 +1,6 @@
 import styles from "./BookDetails.module.css";
 import iso6391 from "iso-639-1";
 function BookDetails({ bookInfo }) {
-  console.log(bookInfo.volumeInfo);
   const identifiers = bookInfo?.volumeInfo?.industryIdentifiers;
   const isbn13 =
     identifiers?.[0]?.type === "ISBN_13"
@@ -13,38 +12,6 @@ function BookDetails({ bookInfo }) {
       : identifiers?.[1]?.identifier;
 
   const publisher = bookInfo?.volumeInfo?.publisher;
-  //date
-  // const dateString = bookInfo?.volumeInfo?.publishedDate;
-  // const date = new Date(dateString);
-  // const year = date.getFullYear();
-  // const month = date.getMonth();
-  // const day = date.getDate() + 1;
-  // console.log(Number("01"));
-  // console.log(bookInfo?.volumeInfo?.publishedDate);
-  // console.log(`month : ${month} , day : ${day} , year : ${year}`);
-  // let publishedDate = "";
-  // const months = [
-  //   "January",
-  //   "February",
-  //   "March",
-  //   "April",
-  //   "May",
-  //   "June",
-  //   "July",
-  //   "August",
-  //   "September",
-  //   "October",
-  //   "November",
-  //   "December",
-  // ];
-  // if (!year && !month && !day) {
-  //   publishedDate = "N/A";
-  // } else if (dateString.length === 4) {
-  //   publishedDate = year + 1;
-  // } else {
-  //   publishedDate = `${months[month]} ${day}, ${year}`;
-  // }
-
   const dateString = bookInfo?.volumeInfo?.publishedDate;
   let publishedDate = "";
   let year = "";
@@ -78,7 +45,6 @@ function BookDetails({ bookInfo }) {
       year ? ", " + year : ""
     }`;
   }
-  console.log(bookInfo?.volumeInfo?.publishedDate);
   //
   const categories = bookInfo?.volumeInfo?.categories;
   let genres = categories === undefined ? "N/A" : categories[0];
@@ -92,13 +58,29 @@ function BookDetails({ bookInfo }) {
   const language = iso6391.getName(languageCode);
   return (
     <div className={styles.container}>
-      <p>ISBN-13: {isbn13 === undefined ? "N/A" : isbn13}</p>
-      <p>ISBN-10: {isbn10 === undefined ? "N/A" : isbn10}</p>
-      <p>Publisher: {publisher === undefined ? "N/A" : publisher}</p>
-      <p>Publication Date: {publishedDate}</p>
-      <p>Genre(s): {genres === undefined ? "N/A" : genres}</p>
-      <p>Pages: {pages === undefined ? "N/A" : pages}</p>
-      <p>Language: {language === "" ? "N/A" : language}</p>
+      <h3 className={styles.title}>Book Details</h3>
+      <div className={styles["details-container"]}>
+        <div className={styles["left-portion"]}>
+          <p className={styles.text}>ISBN-13:</p>
+          <p className={styles.text}>ISBN-10:</p>
+          <p className={styles.text}>Publisher:</p>
+          <p className={styles.text}>Publication Date:</p>
+          <p className={styles.text}>Genre(s):</p>
+          <p className={styles.text}>Pages:</p>
+          <p className={styles.text}>Language:</p>
+        </div>
+        <div className={styles["right-portion"]}>
+          <p className={styles.text}>{isbn13 === undefined ? "N/A" : isbn13}</p>
+          <p className={styles.text}>{isbn10 === undefined ? "N/A" : isbn10}</p>
+          <p className={styles.text}>
+            {publisher === undefined ? "N/A" : publisher}
+          </p>
+          <p className={styles.text}>{publishedDate}</p>
+          <p className={styles.text}>{genres === undefined ? "N/A" : genres}</p>
+          <p className={styles.text}>{pages === undefined ? "N/A" : pages}</p>
+          <p className={styles.text}>{language === "" ? "N/A" : language}</p>
+        </div>
+      </div>
     </div>
   );
 }

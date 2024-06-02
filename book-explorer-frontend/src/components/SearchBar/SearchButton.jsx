@@ -31,6 +31,7 @@ function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
         userInput: searchTerm,
         showNum: 36,
         noMore: false,
+        highlightCard: -1,
       };
       // Update the redux store with the received data
       dispatch(setBooks(payload));

@@ -10,6 +10,7 @@ const initialState = {
   userInput: "",
   noMore: false,
   showNum: 36,
+  highlightCard: 0,
 };
 
 const booksSlice = createSlice({
@@ -28,6 +29,7 @@ const booksSlice = createSlice({
         noMore,
         clickCounter,
         showNum,
+        highlightCard,
       } = action.payload;
       state.books = books;
       state.pages = pages;
@@ -39,6 +41,7 @@ const booksSlice = createSlice({
       state.noMore = noMore;
       state.clickCounter = clickCounter;
       state.showNum = showNum;
+      state.highlightCard = highlightCard;
     },
   },
 });

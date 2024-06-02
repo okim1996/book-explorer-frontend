@@ -14,13 +14,13 @@ function BookCover({ bookInfo }) {
             ? "Cover Not Available"
             : bookInfo.volumeInfo.title
         }
+        className={styles.image}
       />
       {rating === undefined ? (
         <p>No User Ratings</p>
       ) : (
         <StarRating rating={rating} reviewCount={ratingCount}></StarRating>
       )}
-      {/* <StarRating></StarRating> */}
     </div>
   );
 }

@@ -10,18 +10,19 @@ import { setBooks } from "../../store/booksSlice";
 import styles from "./BooksContainer.module.css";
 import Footer from "../UI/Footer";
 import NumberResults from "../Pagination/NumberResults";
+import { current } from "@reduxjs/toolkit";
 function BooksContainer() {
   // Access the state from the Redux Store
   const containerRef = useRef(null);
   const booksRef = useRef(null);
   const store = useSelector((state) => state.books);
+  // const [highlight, setHighlight] = useState(store.highlightCard);
   const [searchYTarget, setSearchYTarget] = useState(10000);
   const [pageY, setPageY] = useState(0);
   const [pageBottom, setPageBottom] = useState(0);
   const [searchBottom, setSearchBottom] = useState(0);
   let currentIndex = Math.abs(store.currentPage - 1) * store.showNum;
   let endIndex = store.currentPage * store.showNum;
-
   // determine the top and bottom of the page y position on mousescroll
   useEffect(() => {
     const handleScroll = () => {
@@ -46,9 +47,7 @@ function BooksContainer() {
     const container = containerRef.current;
     if (container) {
       const rect = container.getBoundingClientRect();
-      // console.log(`top ${rect.top} , bottom ${rect.bottom}`);
       const yPosition = rect.top + window.scrollY; // Y position relative to the entire document
-      // console.log("Y Position of the books container is :", yPosition);
       setSearchYTarget(yPosition);
     }
     setTimeout(() => {
@@ -93,9 +92,16 @@ function BooksContainer() {
 
           <NumberResults></NumberResults>
           <div ref={booksRef} className={styles["books-container"]}>
-            {store.books.slice(currentIndex, endIndex).map((book, index) => (
-              <BookCard key={index} bookInfo={book}></BookCard>
-            ))}
+            {store.books.slice(currentIndex, endIndex).map((book, index) => {
+              console.log(index);
+              return (
+                <BookCard
+                  key={index}
+                  index={currentIndex + index}
+                  bookInfo={book}
+                ></BookCard>
+              );
+            })}
           </div>
           <div
             className={`${styles["sticky-pagination"]} ${

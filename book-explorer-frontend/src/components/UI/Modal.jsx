@@ -1,7 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./Modal.module.css";
 import BookView from "../BookView/BookView";
-function Modal({ index, isOpen, onClose, children, onLeft, onRight }) {
+import { setBooks } from "../../store/booksSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { current } from "@reduxjs/toolkit";
+function Modal({ children, index, isOpen, onClose }) {
+  const store = useSelector((state) => state.books);
+  const dispatch = useDispatch();
   const modalRef = useRef();
   const leftRef = useRef();
   const rightRef = useRef();
@@ -11,8 +16,10 @@ function Modal({ index, isOpen, onClose, children, onLeft, onRight }) {
         if (
           !leftRef.current.contains(event.target) &&
           !rightRef.current.contains(event.target)
-        )
+        ) {
+          dispatch(setBooks({ ...store, hideSticky: false }));
           onClose();
+        }
       }
     };
 
@@ -33,12 +40,25 @@ function Modal({ index, isOpen, onClose, children, onLeft, onRight }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen, onClose]);
+  const clickLeft = () => {
+    if (store.modalIndex > 0) {
+      dispatch(setBooks({ ...store, modalIndex: store.modalIndex - 1 }));
+    }
+  };
+  const clickRight = () => {
+    if (store.modalIndex < store.totalItems - 1) {
+      dispatch(setBooks({ ...store, modalIndex: store.modalIndex + 1 }));
+    }
+  };
   if (!isOpen) return null;
   return (
     <div className={styles.modal}>
       <svg
+        onClick={clickLeft}
         ref={leftRef}
-        className={styles["left-arrow"]}
+        className={`${
+          store.modalIndex === 0 ? styles["disable-left"] : styles["left-arrow"]
+        }`}
         fill="#000000"
         height="70px"
         width="70px"
@@ -70,11 +90,16 @@ function Modal({ index, isOpen, onClose, children, onLeft, onRight }) {
         <div className={styles["button-container"]} onClick={onClose}>
           <span className={styles.button}>&times;</span>
         </div>
-        <BookView index={index}></BookView>
+        <BookView></BookView>
       </div>
       <svg
+        onClick={clickRight}
         ref={rightRef}
-        className={styles["right-arrow"]}
+        className={`${
+          store.modalIndex === store.totalItems - 1
+            ? styles["disable-right"]
+            : styles["right-arrow"]
+        }`}
         fill="#000000"
         height="70px"
         width="70px"

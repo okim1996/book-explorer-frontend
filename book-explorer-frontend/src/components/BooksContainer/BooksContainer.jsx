@@ -82,18 +82,19 @@ function BooksContainer() {
     if (store.books.length !== 0) {
       output = (
         <div ref={containerRef} className={styles["scroll-container"]}>
-          <div
-            className={`${styles["sticky-search"]} ${
-              pageY >= searchYTarget ? "" : styles.hidden
-            }`}
-          >
-            <SearchBar></SearchBar>
-          </div>
+          {!store.hideSticky && (
+            <div
+              className={`${styles["sticky-search"]} ${
+                pageY >= searchYTarget ? "" : styles.hidden
+              }`}
+            >
+              <SearchBar></SearchBar>
+            </div>
+          )}
 
           <NumberResults></NumberResults>
           <div ref={booksRef} className={styles["books-container"]}>
             {store.books.slice(currentIndex, endIndex).map((book, index) => {
-              console.log(index);
               return (
                 <BookCard
                   key={index}
@@ -108,7 +109,7 @@ function BooksContainer() {
               pageBottom < searchBottom + 20 ? "" : styles.hidden
             }`}
           >
-            <PaginationBar></PaginationBar>
+            {!store.hideSticky && <PaginationBar></PaginationBar>}
           </div>
           <PaginationBar></PaginationBar>
         </div>

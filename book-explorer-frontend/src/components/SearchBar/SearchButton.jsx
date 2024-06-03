@@ -32,6 +32,8 @@ function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
         showNum: 36,
         noMore: false,
         highlightCard: -1,
+        hideSticky: false,
+        modalIndex: 0,
       };
       // Update the redux store with the received data
       dispatch(setBooks(payload));

@@ -34,6 +34,8 @@ function LoadMore() {
         noMore: data.books.length === 0 ? true : false,
         showNum: store.showNum,
         highlightCard: -1,
+        hideSticky: false,
+        modalIndex: store.modalIndex,
       };
       if (data.books.length === 0) {
         dispatch(setBooks({ ...store, noMore: true }));

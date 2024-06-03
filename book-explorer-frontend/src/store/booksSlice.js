@@ -11,6 +11,8 @@ const initialState = {
   noMore: false,
   showNum: 36,
   highlightCard: 0,
+  hideSticky: false,
+  modalIndex: 1,
 };
 
 const booksSlice = createSlice({
@@ -30,6 +32,8 @@ const booksSlice = createSlice({
         clickCounter,
         showNum,
         highlightCard,
+        hideSticky,
+        modalIndex,
       } = action.payload;
       state.books = books;
       state.pages = pages;
@@ -42,6 +46,8 @@ const booksSlice = createSlice({
       state.clickCounter = clickCounter;
       state.showNum = showNum;
       state.highlightCard = highlightCard;
+      state.hideSticky = hideSticky;
+      state.modalIndex = modalIndex;
     },
   },
 });

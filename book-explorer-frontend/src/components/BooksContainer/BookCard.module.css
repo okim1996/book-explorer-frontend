@@ -1,5 +1,6 @@
 .highlight {
-  padding: 10px;
+  box-shadow: 0 0 0 6px #19d959;
+  /* box-shadow: 0 0 0 6px black; */
 }
 .book-cell {
   position: relative; /* Ensure relative positioning for absolute positioning of background image */
@@ -34,11 +35,3 @@
 .book-cover:hover {
   scale: 1.05;
 }
-/* 
-.main-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: opacity 0.3s ease;
-} */

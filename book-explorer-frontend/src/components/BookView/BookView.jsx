@@ -5,10 +5,9 @@ import BookHeading from "./BookHeading";
 import styles from "./BookView.module.css";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-function BookView({ index }) {
+function BookView() {
   const store = useSelector((state) => state.books);
-  const [bookIndex, setBookIndex] = useState(index);
-  const bookInfo = store.books[bookIndex];
+  const bookInfo = store.books[store.modalIndex];
   return (
     <div className={styles["main-container"]}>
       <div className={styles["top-row"]}>

@@ -16,6 +16,7 @@ function PaginationRow({ store, inputValue, setInputValue }) {
   const handleClickPage = (event) => {
     const spanElement = event.currentTarget.querySelector("span");
     const number = Number(spanElement.textContent);
+
     setInputValue(number);
     dispatch(setBooks({ ...store, currentPage: number }));
   };

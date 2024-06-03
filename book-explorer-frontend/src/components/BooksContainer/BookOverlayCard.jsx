@@ -14,8 +14,10 @@ function BookOverlayCard({ index, bookInfo }) {
   const store = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const openModal = () => {
-    // dispatch(setBooks({ ...store, highlightCard: index }));
+    // console.log(`overlay ${index}`);
+    dispatch(setBooks({ ...store, hideSticky: true, modalIndex: index }));
     setIsModalOpen(true);
   };
   const closeModal = () => {
@@ -32,10 +34,7 @@ function BookOverlayCard({ index, bookInfo }) {
       <div onClick={openModal} className={styles["button-container"]}>
         <span className={styles.button}>View</span>
       </div>
-      {/* <button onClick={openModal}>View</button> */}
-      <Modal index={index} isOpen={isModalOpen} onClose={closeModal}>
-        {/* <BookView index={index}></BookView> */}
-      </Modal>
+      <Modal index={index} isOpen={isModalOpen} onClose={closeModal}></Modal>
     </div>
   );
 }

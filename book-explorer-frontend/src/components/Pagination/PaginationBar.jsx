@@ -18,7 +18,7 @@ function PaginationBar() {
   // const [currentPage, setCurrentPage] = useState(1);
   const [allowSubmit, setAllowSubmit] = useState(false);
   const dispatch = useDispatch();
-
+  console.log(`pagination bar ${store.currentPage}`);
   useEffect(() => {
     setInputValue(store.pages);
   }, [store.pages]);

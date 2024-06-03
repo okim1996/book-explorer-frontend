@@ -2,15 +2,26 @@ import BookOverlayCard from "./BookOverlayCard";
 import styles from "./BookCard.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
+import { useEffect } from "react";
 function BookCard({ index, bookInfo }) {
   const store = useSelector((state) => state.books);
   const dispatch = useDispatch();
-  // const imageLink = bookInfo.volumeInfo?.imageLinks?.thumbnail;
   const imageLink = store.books[index]?.volumeInfo?.imageLinks?.thumbnail;
+  useEffect(() => {
+    const currentPage = Math.ceil((store.modalIndex + 1) / store.showNum);
+    console.log(
+      `bookcard ${store.modalIndex + 1} , ${store.showNum} , ${currentPage} , ${
+        store.currentPage
+      }`
+    );
+    if (currentPage !== store.currentPage) {
+      dispatch(setBooks({ ...store, currentPage: currentPage }));
+    }
+  }, [store.modalIndex]);
   return (
     <div
       className={`${styles["book-cell"]} ${
-        store.highlightCard === index ? styles.highlight : ""
+        store.modalIndex === index ? styles.highlight : ""
       }`}
     >
       <div className={styles["background-image"]}></div>

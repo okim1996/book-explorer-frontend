@@ -5,7 +5,6 @@ function SearchSection() {
   return (
     <div className={styles.container}>
       <SearchContainer></SearchContainer>
-      {/* <SearchPhoto></SearchPhoto> */}
     </div>
   );
 }

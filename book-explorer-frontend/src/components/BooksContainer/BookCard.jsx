@@ -7,17 +7,12 @@ function BookCard({ index, bookInfo }) {
   const store = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const imageLink = store.books[index]?.volumeInfo?.imageLinks?.thumbnail;
-  useEffect(() => {
-    const currentPage = Math.ceil((store.modalIndex + 1) / store.showNum);
-    console.log(
-      `bookcard ${store.modalIndex + 1} , ${store.showNum} , ${currentPage} , ${
-        store.currentPage
-      }`
-    );
-    if (currentPage !== store.currentPage) {
-      dispatch(setBooks({ ...store, currentPage: currentPage }));
-    }
-  }, [store.modalIndex]);
+  // useEffect(() => {
+  //   const currentPage = Math.ceil(store.modalIndex + 1 / store.showNum);
+  //   if (currentPage !== store.currentPage) {
+  //     dispatch(setBooks({ ...store, currentPage: currentPage }));
+  //   }
+  // }, [store.modalIndex]);
   return (
     <div
       className={`${styles["book-cell"]} ${

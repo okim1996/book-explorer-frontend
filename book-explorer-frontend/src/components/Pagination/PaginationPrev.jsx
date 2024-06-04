@@ -1,7 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./PaginationPrev.module.css";
 import { setBooks } from "../../store/booksSlice";
-function PaginationPrev({ store, inputValue, setInputValue }) {
+function PaginationPrev({ inputValue, setInputValue }) {
+  const store = useSelector((state) => state.books);
   const dispatch = useDispatch();
   const handlePrev = () => {
     setInputValue(Number(store.currentPage - 1));

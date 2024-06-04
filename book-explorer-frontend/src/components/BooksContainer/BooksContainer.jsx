@@ -23,6 +23,7 @@ function BooksContainer() {
   const [searchBottom, setSearchBottom] = useState(0);
   let currentIndex = Math.abs(store.currentPage - 1) * store.showNum;
   let endIndex = store.currentPage * store.showNum;
+  const dispatch = useDispatch();
   // determine the top and bottom of the page y position on mousescroll
   useEffect(() => {
     const handleScroll = () => {
@@ -74,7 +75,10 @@ function BooksContainer() {
   useEffect(() => {
     currentIndex = Math.abs(store.currentPage - 1) * store.showNum;
     endIndex = store.currentPage * store.showNum;
+    dispatch(setBooks({ ...store, modalIndex: currentIndex }));
+    dispatch(setBooks({ ...store }));
   }, [store.currentPage]);
+  //figure out which page to go to based on modalIndex
   let output = "";
   if (store.userInput === "") {
     output = <EmptyPage></EmptyPage>;

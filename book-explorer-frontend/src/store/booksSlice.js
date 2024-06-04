@@ -12,7 +12,7 @@ const initialState = {
   showNum: 36,
   highlightCard: 0,
   hideSticky: false,
-  modalIndex: 1,
+  modalIndex: 0,
 };
 
 const booksSlice = createSlice({
@@ -52,6 +52,6 @@ const booksSlice = createSlice({
   },
 });
 
-export const { setBooks, setPage } = booksSlice.actions;
+export const { setBooks } = booksSlice.actions;
 
 export default booksSlice.reducer;

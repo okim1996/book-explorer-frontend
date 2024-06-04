@@ -10,3 +10,73 @@
 .main-text {
   margin-top: 0;
 }
+
+/* Small devices (smartphones in portrait mode) */
+@media (max-width: 480px) {
+  /* Your CSS rules here */
+  .container {
+    width: 95%;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    margin: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.92);
+  }
+}
+
+/* Medium devices (smartphones in landscape mode, small tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Your CSS rules here */
+  .container {
+    width: 80%;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    margin: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.92);
+  }
+}
+
+/* Large devices (tablets in portrait mode, smaller laptops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Your CSS rules here */
+  .container {
+    width: 70%;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    margin: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.92);
+  }
+}
+
+/* Extra-large devices (tablets in landscape mode, standard desktops) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Your CSS rules here */
+  .container {
+    width: 60%;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    margin: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.92);
+  }
+}
+
+/* Wide screens (large desktops and high-resolution monitors) */
+@media (min-width: 1281px) {
+  /* Your CSS rules here */
+  .container {
+    width: 40%;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    margin: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.92);
+  }
+}

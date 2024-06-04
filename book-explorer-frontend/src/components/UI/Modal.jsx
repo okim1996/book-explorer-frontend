@@ -42,12 +42,26 @@ function Modal({ children, index, isOpen, onClose }) {
   }, [isOpen, onClose]);
   const clickLeft = () => {
     if (store.modalIndex > 0) {
-      dispatch(setBooks({ ...store, modalIndex: store.modalIndex - 1 }));
+      const page = Math.floor(store.modalIndex / store.showNum) + 1;
+      dispatch(
+        setBooks({
+          ...store,
+          modalIndex: store.modalIndex - 1,
+          currentPage: page,
+        })
+      );
     }
   };
   const clickRight = () => {
     if (store.modalIndex < store.totalItems - 1) {
-      dispatch(setBooks({ ...store, modalIndex: store.modalIndex + 1 }));
+      const page = Math.floor(store.modalIndex / store.showNum) + 1;
+      dispatch(
+        setBooks({
+          ...store,
+          modalIndex: store.modalIndex + 1,
+          currentPage: page,
+        })
+      );
     }
   };
   if (!isOpen) return null;

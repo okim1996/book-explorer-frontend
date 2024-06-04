@@ -1,8 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./PaginationNext.module.css";
 import { setBooks } from "../../store/booksSlice";
-function PaginationNext({ store, inputValue, setInputValue }) {
+function PaginationNext({ inputValue, setInputValue }) {
   const dispatch = useDispatch();
+  const store = useSelector((state) => state.books);
 
   const handleNext = () => {
     setInputValue(Number(store.currentPage + 1));

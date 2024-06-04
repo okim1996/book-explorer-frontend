@@ -1,7 +1,23 @@
 .bold {
   font-weight: bold;
 }
-
+.top-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.input-field {
+  width: 40px;
+}
+.bottom-row {
+  display: flex;
+  flex-direction: row;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
 .input-wrong {
   background-color: rgba(255, 0, 0, 0.273);
 }
@@ -49,4 +65,54 @@
   user-select: none; /* Standard syntax */
 
   transform-origin: center center;
+}
+/* Small devices (smartphones in portrait mode) */
+@media (max-width: 480px) {
+  /* Your CSS rules here */
+  .pagination-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .top-row {
+    width: 100%;
+  }
+  .bottom-row {
+    width: 100%;
+  }
+}
+
+/* Medium devices (smartphones in landscape mode, small tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Your CSS rules here */
+  .pagination-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .top-row {
+    width: 100%;
+  }
+  .bottom-row {
+    width: 100%;
+  }
+}
+
+/* Large devices (tablets in portrait mode, smaller laptops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Your CSS rules here */
+}
+
+/* Extra-large devices (tablets in landscape mode, standard desktops) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Your CSS rules here */
+}
+
+/* Wide screens (large desktops and high-resolution monitors) */
+@media (min-width: 1281px) {
+  /* Your CSS rules here */
 }

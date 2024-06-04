@@ -18,7 +18,6 @@ function PaginationBar() {
   // const [currentPage, setCurrentPage] = useState(1);
   const [allowSubmit, setAllowSubmit] = useState(false);
   const dispatch = useDispatch();
-  console.log(`pagination bar ${store.currentPage}`);
   useEffect(() => {
     setInputValue(store.pages);
   }, [store.pages]);
@@ -47,56 +46,55 @@ function PaginationBar() {
         <div></div>
       ) : (
         <div className={styles["pagination-container"]}>
-          <PaginationPrev
-            store={store}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-          ></PaginationPrev>
-          <PaginationPrevSet
-            store={store}
-            setInputValue={setInputValue}
-          ></PaginationPrevSet>
-          <PaginationRow
-            store={store}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-          ></PaginationRow>
-          <PaginationNextSet
-            store={store}
-            setInputValue={setInputValue}
-          ></PaginationNextSet>
-          <PaginationNext
-            store={store}
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-          ></PaginationNext>
-          <input
-            className={`${
-              inputValue > 0 && inputValue <= store.pages
-                ? ""
-                : styles["input-wrong"]
-            }`}
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyPress={(event) => handleKeyPress(event)}
-            placeholder="Enter a number..."
-            pattern="[0-9]*"
-          />
-          <div className={styles.align}>
-            <span>/ {store.pages}</span>
+          <div className={styles["top-row"]}>
+            <PaginationPrev
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+            ></PaginationPrev>
+            <PaginationPrevSet
+              setInputValue={setInputValue}
+            ></PaginationPrevSet>
+            <PaginationRow
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+            ></PaginationRow>
+            <PaginationNextSet
+              setInputValue={setInputValue}
+            ></PaginationNextSet>
+            <PaginationNext
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+            ></PaginationNext>
           </div>
-          <div
-            onClick={handleButtonClick}
-            className={`${styles["button-container"]} ${
-              inputValue > 0 && inputValue <= store.pages
-                ? ""
-                : styles["disable-button"]
-            }`}
-          >
-            <span className={styles.button}>Confirm</span>
+          <div className={styles["bottom-row"]}>
+            <input
+              className={`${
+                inputValue > 0 && inputValue <= store.pages
+                  ? ""
+                  : styles["input-wrong"]
+              } ${styles["input-field"]}`}
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyPress={(event) => handleKeyPress(event)}
+              placeholder="Enter a number..."
+              pattern="[0-9]*"
+            />
+            <div className={styles.align}>
+              <span>/ {store.pages}</span>
+            </div>
+            <div
+              onClick={handleButtonClick}
+              className={`${styles["button-container"]} ${
+                inputValue > 0 && inputValue <= store.pages
+                  ? ""
+                  : styles["disable-button"]
+              }`}
+            >
+              <span className={styles.button}>Confirm</span>
+            </div>
+            <LoadMore></LoadMore>
           </div>
-          <LoadMore></LoadMore>
         </div>
       )}
     </>

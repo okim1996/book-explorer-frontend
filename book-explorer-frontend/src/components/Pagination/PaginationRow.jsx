@@ -1,7 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./PaginationRow.module.css";
 import { setBooks } from "../../store/booksSlice";
-function PaginationRow({ store, inputValue, setInputValue }) {
+function PaginationRow({ inputValue, setInputValue }) {
+  const store = useSelector((state) => state.books);
+
   const dispatch = useDispatch();
   const set = Math.ceil(store.currentPage / 4) - 1;
   let remainder = store.currentPage % 4;

@@ -35,7 +35,10 @@ function LoadMore() {
         showNum: store.showNum,
         highlightCard: -1,
         hideSticky: false,
-        modalIndex: store.modalIndex,
+        modalIndex:
+          (Math.ceil((store.totalItems + data.books.length) / store.showNum) -
+            1) *
+          store.showNum,
       };
       if (data.books.length === 0) {
         dispatch(setBooks({ ...store, noMore: true }));

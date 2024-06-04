@@ -1,7 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
 import styles from "./PaginationNextSet.module.css";
-function PaginationPrevSet({ store, setInputValue }) {
+function PaginationPrevSet({ setInputValue }) {
+  const store = useSelector((state) => state.books);
+
   const dispatch = useDispatch();
   const set = Math.ceil(store.currentPage / 4) - 1;
 

@@ -2,8 +2,6 @@
   z-index: 1000;
   background-color: rgba(255, 255, 255, 0.9);
   box-sizing: border-box;
-  /* padding: 10px 0px; */
-
   width: 100vw;
   position: -webkit-sticky;
   position: sticky;
@@ -46,12 +44,7 @@
   justify-content: center; /* Center grid items horizontally */
   box-sizing: border-box;
   padding: 40px;
-  /* background: linear-gradient(
-    135deg,
-    rgba(255, 167, 38, 0.4),
-    rgba(255, 183, 77, 0.4),
-    rgba(255, 204, 128, 0.4)
-  ); */
+  box-sizing: border-box;
 }
 .hidden {
   display: none;
@@ -64,4 +57,88 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+/* Small devices (smartphones in portrait mode) */
+@media (max-width: 480px) {
+  /* Your CSS rules here */
+  .books-container {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* 6 columns */
+    grid-gap: 10px; /* Adjust the gap between columns */
+    width: 100%; /* 80% of the screen width */
+    margin: 0 auto; /* Center the container horizontally */
+    justify-content: center; /* Center grid items horizontally */
+    box-sizing: border-box;
+    padding: 20px;
+  }
+}
+
+/* Medium devices (smartphones in landscape mode, small tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Your CSS rules here */
+  .books-container {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 6 columns */
+    grid-gap: 10px; /* Adjust the gap between columns */
+    width: 100%; /* 80% of the screen width */
+    margin: 0 auto; /* Center the container horizontally */
+    justify-content: center; /* Center grid items horizontally */
+    box-sizing: border-box;
+    padding: 20px;
+  }
+}
+
+/* Large devices (tablets in portrait mode, smaller laptops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Your CSS rules here */
+  .books-container {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 6 columns */
+    grid-gap: 10px; /* Adjust the gap between columns */
+    width: 100%; /* 80% of the screen width */
+    margin: 0 auto; /* Center the container horizontally */
+    justify-content: center; /* Center grid items horizontally */
+    box-sizing: border-box;
+    padding: 20px;
+  }
+}
+
+/* Extra-large devices (tablets in landscape mode, standard desktops) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Your CSS rules here */
+  .books-container {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 6 columns */
+    grid-gap: 10px; /* Adjust the gap between columns */
+    width: 100%; /* 80% of the screen width */
+    margin: 0 auto; /* Center the container horizontally */
+    justify-content: center; /* Center grid items horizontally */
+    box-sizing: border-box;
+    padding: 20px;
+  }
+}
+
+/* Wide screens (large desktops and high-resolution monitors) */
+@media (min-width: 1281px) {
+  /* Your CSS rules here */
+  .books-container {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 columns */
+    grid-gap: 10px; /* Adjust the gap between columns */
+    width: 100%; /* 80% of the screen width */
+    margin: 0 auto; /* Center the container horizontally */
+    justify-content: center; /* Center grid items horizontally */
+    box-sizing: border-box;
+    padding: 20px;
+  }
 }

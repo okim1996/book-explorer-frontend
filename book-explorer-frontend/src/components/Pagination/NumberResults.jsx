@@ -25,7 +25,9 @@ function NumberResults() {
   };
   return (
     <div className={styles.container}>
-      <p>{`Showing Results ${start} - ${end} of ${store.totalItems}`}</p>
+      <p
+        className={styles.text}
+      >{`Showing Results ${start} - ${end} of ${store.totalItems}`}</p>
       <select
         className={styles.options}
         name="number-results"

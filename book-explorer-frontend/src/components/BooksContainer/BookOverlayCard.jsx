@@ -14,15 +14,14 @@ function BookOverlayCard({ index, bookInfo }) {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const overlayRef = useRef();
-  const [clicked, setClicked] = useState(false);
+  const [touched, setTouched] = useState(false);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (overlayRef.current && !overlayRef.current.contains(event.target)) {
-        console.log(`you clicked outside`);
-        setClicked(false);
+        setTouched(false);
       }
     };
-    if (clicked) {
+    if (touched) {
       document.addEventListener("touchstart", handleClickOutside);
     } else {
       document.removeEventListener("touchstart", handleClickOutside);
@@ -30,16 +29,17 @@ function BookOverlayCard({ index, bookInfo }) {
     return () => {
       document.removeEventListener("touchstart", handleClickOutside);
     };
-  }, [clicked]);
+  }, [touched]);
   const openModal = () => {
     dispatch(setBooks({ ...store, hideSticky: true, modalIndex: index }));
     setIsModalOpen(true);
+    setClicked(false);
   };
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const clickHandler = () => {
-    setClicked(true);
+  const touchStartHandler = () => {
+    setTouched(true);
   };
   const dateString = bookInfo?.volumeInfo?.publishedDate;
   const date = new Date(dateString);
@@ -48,9 +48,9 @@ function BookOverlayCard({ index, bookInfo }) {
   const day = date.getDate();
   return (
     <div
-      className={`${styles.overlay} ${clicked ? styles.show : ""}`}
-      onClick={clickHandler}
+      className={`${styles.overlay} ${touched ? styles.show : ""}`}
       ref={overlayRef}
+      onTouchStart={touchStartHandler}
     >
       <p className={styles.text}>{bookInfo.volumeInfo.title}</p>
       <div onClick={openModal} className={styles["button-container"]}>

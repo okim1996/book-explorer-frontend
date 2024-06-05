@@ -75,12 +75,32 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    box-sizing: border-box;
   }
   .top-row {
     width: 100%;
   }
-  .bottom-row {
+  .top-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
     width: 100%;
+  }
+  .input-field {
+    width: 30px;
+  }
+  .button-container {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 35px;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: 0.05s;
   }
 }
 
@@ -93,23 +113,115 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    box-sizing: border-box;
   }
   .top-row {
     width: 100%;
   }
-  .bottom-row {
+  .top-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
     width: 100%;
+  }
+  .input-field {
+    width: 30px;
+  }
+  .button-container {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 35px;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: 0.05s;
   }
 }
 
 /* Large devices (tablets in portrait mode, smaller laptops) */
 @media (min-width: 769px) and (max-width: 1024px) {
   /* Your CSS rules here */
+  .pagination-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    box-sizing: border-box;
+  }
+  .top-row {
+    width: 100%;
+  }
+  .top-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .input-field {
+    width: 30px;
+  }
+  .button-container {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 35px;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: 0.05s;
+  }
+  .align {
+    width: 60px;
+  }
 }
 
 /* Extra-large devices (tablets in landscape mode, standard desktops) */
 @media (min-width: 1025px) and (max-width: 1280px) {
   /* Your CSS rules here */
+  .pagination-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    box-sizing: border-box;
+  }
+  .top-row {
+    width: 100%;
+  }
+  .top-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .input-field {
+    width: 30px;
+  }
+  .button-container {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 35px;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: 0.05s;
+  }
+  .align {
+    width: 60px;
+  }
 }
 
 /* Wide screens (large desktops and high-resolution monitors) */

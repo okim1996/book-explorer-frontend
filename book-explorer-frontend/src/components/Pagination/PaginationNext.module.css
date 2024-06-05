@@ -30,3 +30,67 @@
   transform-origin: center center;
   font-weight: 500;
 }
+
+/* Small devices (smartphones in portrait mode) */
+@media (max-width: 480px) {
+  /* Your CSS rules here */
+  .container {
+    display: flex;
+    justify-content: center;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: 0.05s;
+  }
+}
+
+/* Medium devices (smartphones in landscape mode, small tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Your CSS rules here */
+  .container {
+    display: flex;
+    justify-content: center;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: 0.05s;
+  }
+}
+
+/* Large devices (tablets in portrait mode, smaller laptops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Your CSS rules here */
+  .container {
+    display: flex;
+    justify-content: center;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: 0.05s;
+  }
+}
+
+/* Extra-large devices (tablets in landscape mode, standard desktops) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Your CSS rules here */
+}
+
+/* Wide screens (large desktops and high-resolution monitors) */
+@media (min-width: 1281px) {
+  /* Your CSS rules here */
+}

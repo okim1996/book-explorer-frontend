@@ -1,29 +1,31 @@
-.horizontal-line {
-  border-top: 1px solid rgba(0, 0, 0, 0.243);
-  height: 1px;
-  width: 95%;
-  align-self: center;
-  margin-top: 20px;
-  margin-bottom: 0;
-}
-.main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  width: 100%;
-}
-.top-row {
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, min-content);
   gap: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
+  box-sizing: border-box;
 }
-.details-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 60%;
-  gap: 10px;
+/* Small devices (smartphones in portrait mode) */
+@media (max-width: 480px) {
+  /* Your CSS rules here */
+}
+
+/* Medium devices (smartphones in landscape mode, small tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Your CSS rules here */
+}
+
+/* Large devices (tablets in portrait mode, smaller laptops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Your CSS rules here */
+}
+
+/* Extra-large devices (tablets in landscape mode, standard desktops) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Your CSS rules here */
+}
+
+/* Wide screens (large desktops and high-resolution monitors) */
+@media (min-width: 1281px) {
+  /* Your CSS rules here */
 }

@@ -78,7 +78,6 @@ function BooksContainer() {
     dispatch(setBooks({ ...store, modalIndex: currentIndex }));
     dispatch(setBooks({ ...store }));
   }, [store.currentPage]);
-  //figure out which page to go to based on modalIndex
   let output = "";
   if (store.userInput === "") {
     output = <EmptyPage></EmptyPage>;

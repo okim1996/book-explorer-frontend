@@ -20,3 +20,57 @@
 .description {
   margin-top: 4px;
 }
+
+/* Small devices (smartphones in portrait mode) */
+@media (max-width: 480px) {
+  /* Your CSS rules here */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    /* border: 1px solid black; */
+    grid-column: 1 / -1;
+    grid-row: 4 / 5;
+    border-top: 1px solid rgba(0, 0, 0, 0.175);
+  }
+  .title {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    align-self: flex-start;
+  }
+}
+
+/* Medium devices (smartphones in landscape mode, small tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Your CSS rules here */
+  /* .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    grid-column: 1 / -1;
+    grid-row: 4 / 5;
+    border-top: 1px solid rgba(0, 0, 0, 0.175);
+  }
+  .title {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    align-self: flex-start;
+  } */
+}
+
+/* Large devices (tablets in portrait mode, smaller laptops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Your CSS rules here */
+}
+
+/* Extra-large devices (tablets in landscape mode, standard desktops) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Your CSS rules here */
+}
+
+/* Wide screens (large desktops and high-resolution monitors) */
+@media (min-width: 1281px) {
+  /* Your CSS rules here */
+}

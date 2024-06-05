@@ -8,6 +8,13 @@
 /* Small devices (smartphones in portrait mode) */
 @media (max-width: 480px) {
   /* Your CSS rules here */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, min-content);
+    gap: 10px;
+    box-sizing: border-box;
+  }
 }
 
 /* Medium devices (smartphones in landscape mode, small tablets) */

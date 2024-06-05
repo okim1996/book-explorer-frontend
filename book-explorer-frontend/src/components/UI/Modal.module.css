@@ -48,7 +48,7 @@
   padding: 20px;
   border-radius: 2px;
   position: relative;
-  width: 60%;
+  width: 70%;
   height: 70%;
   overflow: auto;
 }
@@ -114,12 +114,21 @@
     right: 15%;
     top: 1%;
   }
+  .modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 2px;
+    position: relative;
+    width: 80%;
+    height: 70%;
+    overflow: auto;
+  }
 }
 
 /* Medium devices (smartphones in landscape mode, small tablets) */
 @media (min-width: 481px) and (max-width: 768px) {
   /* Your CSS rules here */
-  .left-arrow {
+  /* .left-arrow {
     position: absolute;
     left: 15%;
     top: 1%;
@@ -148,15 +157,23 @@
     position: absolute;
     right: 15%;
     top: 1%;
-  }
+  } */
+  /* .modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 2px;
+    position: relative;
+    width: 60%;
+    height: 70%;
+    overflow: auto;
+  } */
 }
 
 /* Large devices (tablets in portrait mode, smaller laptops) */
 @media (min-width: 769px) and (max-width: 1024px) {
   /* Your CSS rules here */
-  .left-arrow {
+  /* .left-arrow {
     position: absolute;
-    /* left: 15%; */
     left: 4%;
     fill: white;
     cursor: pointer;
@@ -180,15 +197,14 @@
     fill: rgba(0, 0, 0, 0.275);
     position: absolute;
     right: 4%;
-  }
+  } */
 }
 
 /* Extra-large devices (tablets in landscape mode, standard desktops) */
 @media (min-width: 1025px) and (max-width: 1280px) {
   /* Your CSS rules here */
-  .left-arrow {
+  /* .left-arrow {
     position: absolute;
-    /* left: 15%; */
     left: 8%;
     fill: white;
     cursor: pointer;
@@ -212,15 +228,14 @@
     fill: rgba(0, 0, 0, 0.275);
     position: absolute;
     right: 8%;
-  }
+  } */
 }
 
 /* Wide screens (large desktops and high-resolution monitors) */
 @media (min-width: 1281px) {
   /* Your CSS rules here */
-  .left-arrow {
+  /* .left-arrow {
     position: absolute;
-    /* left: 15%; */
     left: 12%;
     fill: white;
     cursor: pointer;
@@ -244,5 +259,5 @@
     fill: rgba(0, 0, 0, 0.275);
     position: absolute;
     right: 12%;
-  }
+  } */
 }

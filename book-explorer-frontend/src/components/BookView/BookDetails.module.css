@@ -11,6 +11,7 @@
   text-align: start;
   gap: 40px;
 }
+
 .text {
   margin-top: 0%;
   margin-bottom: 12px;
@@ -20,4 +21,70 @@
   text-align: center;
   margin-top: 0%;
   margin-bottom: 24px;
+}
+
+/* Small devices (smartphones in portrait mode) */
+@media (max-width: 480px) {
+  /* Your CSS rules here */
+  .container {
+    /* border: 1px solid black; */
+    border-top: 1px solid rgba(0, 0, 0, 0.216);
+    grid-column: 1/-1;
+    grid-row: 3/4;
+  }
+  .details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: start;
+    gap: 10px;
+  }
+  .title {
+    text-align: left;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+}
+
+/* Medium devices (smartphones in landscape mode, small tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Your CSS rules here */
+  /* .container {
+    border-top: 1px solid rgba(0, 0, 0, 0.216);
+    grid-column: 1/-1;
+    grid-row: 3/4;
+  }
+  .details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: start;
+    gap: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.215);
+    box-sizing: border-box;
+  }
+  .title {
+    text-align: left;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  } */
+}
+
+/* Large devices (tablets in portrait mode, smaller laptops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Your CSS rules here */
+}
+
+/* Extra-large devices (tablets in landscape mode, standard desktops) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Your CSS rules here */
+}
+
+/* Wide screens (large desktops and high-resolution monitors) */
+@media (min-width: 1281px) {
+  /* Your CSS rules here */
 }

@@ -58,7 +58,7 @@ function BookDetails({ bookInfo }) {
   const language = iso6391.getName(languageCode);
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Book Details</h3>
+      <h4 className={styles.title}>Book Details</h4>
       <div className={styles["details-container"]}>
         <div className={styles["left-portion"]}>
           <p className={styles.text}>ISBN-13:</p>

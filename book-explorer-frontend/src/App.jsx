@@ -6,14 +6,20 @@ import PaginationBar from "./components/Pagination/PaginationBar";
 import LoadMore from "./components/Pagination/LoadMore";
 import Title from "./components/UI/Title";
 import SearchSection from "./components/SearchSection/SearchSection";
+import { useState } from "react";
 function App() {
+  const [booksLoading, setBooksLoading] = useState(false);
+  console.log(`app ${booksLoading}`);
   return (
     <div id="main-application" className={styles["main-application-container"]}>
       <div className={styles["search-section"]}>
         <Title></Title>
-        <SearchSection></SearchSection>
+        <SearchSection setBooksLoading={setBooksLoading}></SearchSection>
       </div>
-      <BooksContainer></BooksContainer>
+      <BooksContainer
+        booksLoading={booksLoading}
+        setBooksLoading={setBooksLoading}
+      ></BooksContainer>
     </div>
   );
 }

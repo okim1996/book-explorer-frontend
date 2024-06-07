@@ -1,10 +1,10 @@
 import SearchContainer from "./SearchContainer";
 import SearchPhoto from "./SearchPhoto";
 import styles from "./SearchSection.module.css";
-function SearchSection() {
+function SearchSection({ setBooksLoading }) {
   return (
-    <div className={styles.container}>
-      <SearchContainer></SearchContainer>
+    <div id="search-section-container" className={styles.container}>
+      <SearchContainer setBooksLoading={setBooksLoading}></SearchContainer>
     </div>
   );
 }

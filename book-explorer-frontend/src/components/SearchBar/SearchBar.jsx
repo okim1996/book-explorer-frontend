@@ -7,7 +7,7 @@ import styles from "./SearchBar.module.css";
 import Spinner from "../UI/Spinner";
 import MatchingText from "./MatchingText";
 import SearchButton from "./SearchButton";
-function SearchBar() {
+function SearchBar({ setBooksLoading }) {
   const store = useSelector((state) => state.books);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchBy, setSearchBy] = useState("Title");
@@ -49,7 +49,7 @@ function SearchBar() {
     const timeoutId = setTimeout(async () => {
       setLoading(true);
       try {
-        const endpoint = `http://127.0.0.1:8000/api/autoComplete/?columnName=${searchBy}&userInput=${searchTerm}&page=${page}`;
+        const endpoint = `https://oscarkim32.pythonanywhere.com/api/autoComplete/?columnName=${searchBy}&userInput=${searchTerm}&page=${page}`;
         const data = await fetchData(endpoint);
         setSearchResults(data);
       } catch (error) {
@@ -75,11 +75,11 @@ function SearchBar() {
     e.stopPropagation();
     setPage(page + 1);
   };
-  const handleKeyPress = async (event) => {
+  const handleEnterDown = async (event) => {
     if (event.key === "Enter") {
       try {
         // Construct the URL based on the searchTerm and searchBy
-        const url = `http://127.0.0.1:8000/api/books/search?q=${
+        const url = `https://oscarkim32.pythonanywhere.com/api/books/search?q=${
           searchBy === "ISBN" ? "" : "in"
         }${searchBy.toLowerCase()}:${searchTerm}`;
 
@@ -114,10 +114,16 @@ function SearchBar() {
           top: topPosition,
           behavior: "smooth", // 'auto' for instant scroll, 'smooth' for smooth scroll
         });
+        setBooksLoading(false);
       } catch (error) {
         // Handle errors here
         console.log("There was a problem with the fetch operation", error);
       }
+    }
+  };
+  const handleEnterUp = (event) => {
+    if (event.key === "Enter") {
+      setBooksLoading(true);
     }
   };
 
@@ -131,7 +137,8 @@ function SearchBar() {
           placeholder={`Search By ${searchBy}`}
           value={searchTerm}
           onChange={(e) => handleChange(e.target.value)}
-          onKeyPress={(event) => handleKeyPress(event)}
+          onKeyUp={(event) => handleEnterUp(event)}
+          onKeyDown={(event) => handleEnterDown(event)}
         />
         <select
           className={styles["search-by"]}
@@ -145,6 +152,7 @@ function SearchBar() {
         </select>
       </div>
       <SearchButton
+        setBooksLoading={setBooksLoading}
         pressedEnter={pressedEnter}
         setPressedEnter={setPressedEnter}
         searchTerm={searchTerm}

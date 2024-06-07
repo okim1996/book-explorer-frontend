@@ -11,8 +11,9 @@ import styles from "./BooksContainer.module.css";
 import Footer from "../UI/Footer";
 import NumberResults from "../Pagination/NumberResults";
 import { current } from "@reduxjs/toolkit";
-function BooksContainer() {
+function BooksContainer({ booksLoading, setBooksLoading }) {
   // Access the state from the Redux Store
+  console.log(`books container ${booksLoading}`);
   const containerRef = useRef(null);
   const booksRef = useRef(null);
   const store = useSelector((state) => state.books);
@@ -59,7 +60,13 @@ function BooksContainer() {
         setSearchBottom(yPosition);
       }
     }, 300);
-  }, [store.currentPage, store.category, store.userInput, store.showNum]);
+  }, [
+    store.currentPage,
+    store.category,
+    store.userInput,
+    store.showNum,
+    booksLoading,
+  ]);
 
   // scroll the page to the books container on search and pagination
   useEffect(() => {
@@ -69,7 +76,7 @@ function BooksContainer() {
       top: topPosition,
       behavior: "smooth", // 'auto' for instant scroll, 'smooth' for smooth scroll
     });
-  }, [store.currentPage, store.category, store.userInput]);
+  }, [store.currentPage, store.category, store.userInput, booksLoading]);
 
   // figure out which set of books to render to the container
   useEffect(() => {
@@ -91,7 +98,7 @@ function BooksContainer() {
                 pageY >= searchYTarget ? "" : styles.hidden
               }`}
             >
-              <SearchBar></SearchBar>
+              <SearchBar setBooksLoading={setBooksLoading}></SearchBar>
             </div>
           )}
 
@@ -112,24 +119,56 @@ function BooksContainer() {
               pageBottom < searchBottom + 20 ? "" : styles.hidden
             }`}
           >
-            {!store.hideSticky && <PaginationBar></PaginationBar>}
+            {!store.hideSticky && (
+              <PaginationBar
+                booksLoading={booksLoading}
+                setBooksLoading={setBooksLoading}
+              ></PaginationBar>
+            )}
           </div>
-          <PaginationBar></PaginationBar>
+          <PaginationBar
+            booksLoading={booksLoading}
+            setBooksLoading={setBooksLoading}
+          ></PaginationBar>
         </div>
       );
     } else {
       output = <WrongQuery></WrongQuery>;
     }
   }
-  return (
+  let loadingOutput = (
     <div
       id="books-container"
-      className={`${styles["main-container"]} ${
-        store.category === "" ? styles.hidden : ""
-      }`}
+      ref={booksRef}
+      className={styles["books-container"]}
     >
-      {output}
+      {Array.from({ length: store.showNum }, () => 0).map((_, index) => {
+        return (
+          <BookCard
+            key={index}
+            index={index}
+            bookInfo={0}
+            booksLoading={booksLoading}
+          ></BookCard>
+        );
+      })}
     </div>
+  );
+  return (
+    <>
+      {booksLoading ? (
+        loadingOutput
+      ) : (
+        <div
+          id="books-container"
+          className={`${styles["main-container"]} ${
+            store.category === "" ? styles.hidden : ""
+          }`}
+        >
+          {output}
+        </div>
+      )}
+    </>
   );
 }
 export default BooksContainer;

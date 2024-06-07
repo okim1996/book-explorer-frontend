@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
 import styles from "./LoadMore.module.css";
-function LoadMore() {
+import Spinner from "../UI/Spinner";
+function LoadMore({ booksLoading, setBooksLoading }) {
   const store = useSelector((state) => state.books);
   const dispatch = useDispatch();
-  const handleClick = async () => {
+  const handleMouseUp = async () => {
     try {
-      const url = `http://127.0.0.1:8000/api/books/search?q=${
+      console.log(`load more mouse up`);
+      const url = `https://oscarkim32.pythonanywhere.com/api/books/search?q=${
         store.category === "ISBN" ? "" : "in"
       }${store.category.toLowerCase()}:${store.userInput}&pageNumber=${
         Math.ceil(store.totalItems / 36) + 1
@@ -42,30 +44,49 @@ function LoadMore() {
       };
       if (data.books.length === 0) {
         dispatch(setBooks({ ...store, noMore: true }));
+        setBooksLoading(false);
       } else {
         dispatch(setBooks(payload));
+        setBooksLoading(false);
       }
     } catch (error) {
       console.log(error);
     }
   };
+  const handleClick = () => {
+    console.log(`load more click`);
+    setBooksLoading(true);
+  };
+  const loadingButton = (
+    <div className={styles.container}>
+      <Spinner></Spinner>
+    </div>
+  );
   return (
-    <div
-      onClick={handleClick}
-      className={`${styles.container} ${
-        store.noMore ? styles["disable-button"] : ""
-      }`}
-    >
-      {store.noMore ? (
-        <div className={`${styles["button-container"]}`}>
-          <span className={`${styles.button}`}>No More Results</span>
-        </div>
+    <>
+      {booksLoading ? (
+        loadingButton
       ) : (
-        <div className={styles["button-container"]}>
-          <span className={styles.button}>Load More Results</span>
+        <div
+          onClick={handleClick}
+          onMouseUp={handleMouseUp}
+          className={`${styles.container} ${
+            store.noMore ? styles["disable-button"] : ""
+          }`}
+        >
+          {store.noMore ? (
+            <div className={`${styles["button-container"]}`}>
+              <span className={`${styles.button}`}>No More Results</span>
+            </div>
+          ) : (
+            <div className={styles["button-container"]}>
+              <span className={styles.button}>Load More Results</span>
+            </div>
+          )}
+          {/* {store.noMore ? "No More Results" : "Load More Results"} */}
         </div>
       )}
-    </div>
+    </>
   );
 }
 export default LoadMore;

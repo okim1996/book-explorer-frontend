@@ -52,6 +52,7 @@ function SearchButton({ pressedEnter, setPressedEnter, searchTerm, searchBy }) {
       }
     }
     dispatch(setBooks({ ...store, loadingBooks: true }));
+    sendRequest();
   };
   // if (pressedEnter) handleClick();
   return (

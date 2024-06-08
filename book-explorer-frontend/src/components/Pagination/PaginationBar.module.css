@@ -41,6 +41,7 @@
   flex-direction: row;
   gap: 10px;
   color: black;
+  background-color: white;
 }
 
 .button-container {

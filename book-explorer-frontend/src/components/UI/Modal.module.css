@@ -1,3 +1,12 @@
+.none {
+  display: none;
+}
+.slide-from-left {
+  animation: slideFromLeft 0.3s;
+}
+.slide-from-right {
+  animation: slideFromRight 0.3s;
+}
 .disable-left {
   cursor: not-allowed;
   fill: rgba(0, 0, 0, 0.421);
@@ -41,6 +50,7 @@
   justify-content: center;
   z-index: 100;
   color: black;
+  transition: all 1s;
 }
 
 .modalContent {
@@ -127,137 +137,39 @@
 
 /* Medium devices (smartphones in landscape mode, small tablets) */
 @media (min-width: 481px) and (max-width: 768px) {
-  /* Your CSS rules here */
-  /* .left-arrow {
-    position: absolute;
-    left: 15%;
-    top: 1%;
-    fill: white;
-    cursor: pointer;
-    transition: all 0.1s;
-  }
-  .right-arrow {
-    position: absolute;
-    right: 15%;
-    top: 1%;
-    fill: white;
-    cursor: pointer;
-    transition: all 0.1s;
-  }
-  .disable-left {
-    cursor: not-allowed;
-    fill: rgba(0, 0, 0, 0.132);
-    position: absolute;
-    left: 15%;
-    top: 1%;
-  }
-  .disable-right {
-    cursor: not-allowed;
-    fill: rgba(0, 0, 0, 0.275);
-    position: absolute;
-    right: 15%;
-    top: 1%;
-  } */
-  /* .modalContent {
-    background: white;
-    padding: 20px;
-    border-radius: 2px;
-    position: relative;
-    width: 60%;
-    height: 70%;
-    overflow: auto;
-  } */
 }
 
 /* Large devices (tablets in portrait mode, smaller laptops) */
 @media (min-width: 769px) and (max-width: 1024px) {
-  /* Your CSS rules here */
-  /* .left-arrow {
-    position: absolute;
-    left: 4%;
-    fill: white;
-    cursor: pointer;
-    transition: all 0.1s;
-  }
-  .right-arrow {
-    position: absolute;
-    right: 4%;
-    fill: white;
-    cursor: pointer;
-    transition: all 0.1s;
-  }
-  .disable-left {
-    cursor: not-allowed;
-    fill: rgba(0, 0, 0, 0.132);
-    position: absolute;
-    left: 4%;
-  }
-  .disable-right {
-    cursor: not-allowed;
-    fill: rgba(0, 0, 0, 0.275);
-    position: absolute;
-    right: 4%;
-  } */
 }
 
 /* Extra-large devices (tablets in landscape mode, standard desktops) */
 @media (min-width: 1025px) and (max-width: 1280px) {
   /* Your CSS rules here */
-  /* .left-arrow {
-    position: absolute;
-    left: 8%;
-    fill: white;
-    cursor: pointer;
-    transition: all 0.1s;
-  }
-  .right-arrow {
-    position: absolute;
-    right: 8%;
-    fill: white;
-    cursor: pointer;
-    transition: all 0.1s;
-  }
-  .disable-left {
-    cursor: not-allowed;
-    fill: rgba(0, 0, 0, 0.132);
-    position: absolute;
-    left: 8%;
-  }
-  .disable-right {
-    cursor: not-allowed;
-    fill: rgba(0, 0, 0, 0.275);
-    position: absolute;
-    right: 8%;
-  } */
 }
 
 /* Wide screens (large desktops and high-resolution monitors) */
 @media (min-width: 1281px) {
   /* Your CSS rules here */
-  /* .left-arrow {
-    position: absolute;
-    left: 12%;
-    fill: white;
-    cursor: pointer;
-    transition: all 0.1s;
+}
+
+@keyframes slideFromLeft {
+  from {
+    transform: translateX(-10%);
+    opacity: 0;
   }
-  .right-arrow {
-    position: absolute;
-    right: 12%;
-    fill: white;
-    cursor: pointer;
-    transition: all 0.1s;
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
-  .disable-left {
-    cursor: not-allowed;
-    fill: rgba(0, 0, 0, 0.132);
-    position: absolute;
-    left: 12%;
+}
+@keyframes slideFromRight {
+  from {
+    transform: translateX(10%);
+    opacity: 0;
   }
-  .disable-right {
-    cursor: not-allowed;
-    fill: rgba(0, 0, 0, 0.275);
-    position: absolute;
-    right: 12%;
-  } */
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

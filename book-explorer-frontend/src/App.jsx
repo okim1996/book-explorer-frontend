@@ -8,18 +8,13 @@ import Title from "./components/UI/Title";
 import SearchSection from "./components/SearchSection/SearchSection";
 import { useState } from "react";
 function App() {
-  const [booksLoading, setBooksLoading] = useState(false);
-  console.log(`app ${booksLoading}`);
   return (
     <div id="main-application" className={styles["main-application-container"]}>
       <div className={styles["search-section"]}>
         <Title></Title>
-        <SearchSection setBooksLoading={setBooksLoading}></SearchSection>
+        <SearchSection></SearchSection>
       </div>
-      <BooksContainer
-        booksLoading={booksLoading}
-        setBooksLoading={setBooksLoading}
-      ></BooksContainer>
+      <BooksContainer></BooksContainer>
     </div>
   );
 }

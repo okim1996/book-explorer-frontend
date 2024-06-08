@@ -7,9 +7,26 @@ import { current } from "@reduxjs/toolkit";
 function Modal({ children, index, isOpen, onClose }) {
   const store = useSelector((state) => state.books);
   const dispatch = useDispatch();
-  const modalRef = useRef();
+  const modalRef = useRef(null);
   const leftRef = useRef();
   const rightRef = useRef();
+  const [slideFrom, setSlideFrom] = useState("");
+  const [render, setRender] = useState(0);
+  if (modalRef.current) {
+    if (slideFrom == "left") {
+      modalRef.current.classList.add(styles["slide-from-left"]);
+    }
+    if (slideFrom == "right") {
+      modalRef.current.classList.add(styles["slide-from-right"]);
+    }
+  }
+  useEffect(() => {
+    if (modalRef.current) {
+      modalRef.current.classList.remove(styles["slide-from-left"]);
+      modalRef.current.classList.remove(styles["slide-from-right"]);
+    }
+    setRender(render + 1);
+  }, [store.modalIndex]);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -50,6 +67,7 @@ function Modal({ children, index, isOpen, onClose }) {
           currentPage: page,
         })
       );
+      setSlideFrom("left");
     }
   };
   const clickRight = () => {
@@ -62,11 +80,12 @@ function Modal({ children, index, isOpen, onClose }) {
           currentPage: page,
         })
       );
+      setSlideFrom("right");
     }
   };
   if (!isOpen) return null;
   return (
-    <div className={styles.modal}>
+    <div className={`${styles.modal}`}>
       <svg
         onClick={clickLeft}
         ref={leftRef}
@@ -100,7 +119,7 @@ function Modal({ children, index, isOpen, onClose }) {
           </g>
         </g>
       </svg>
-      <div className={styles.modalContent} ref={modalRef}>
+      <div className={`${styles.modalContent}`} ref={modalRef}>
         <div className={styles["button-container"]} onClick={onClose}>
           <span className={styles.button}>&times;</span>
         </div>

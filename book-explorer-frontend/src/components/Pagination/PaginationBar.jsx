@@ -11,7 +11,7 @@ import LoadMore from "./LoadMore";
 import styles from "./PaginationBar.module.css";
 import { current } from "@reduxjs/toolkit";
 
-function PaginationBar({ booksLoading, setBooksLoading }) {
+function PaginationBar() {
   // Access the state from the Redux Store
   const store = useSelector((state) => state.books);
   const [inputValue, setInputValue] = useState(store.pages);
@@ -93,10 +93,7 @@ function PaginationBar({ booksLoading, setBooksLoading }) {
             >
               <span className={styles.button}>Confirm</span>
             </div>
-            <LoadMore
-              booksLoading={booksLoading}
-              setBooksLoading={setBooksLoading}
-            ></LoadMore>
+            <LoadMore></LoadMore>
           </div>
         </div>
       )}

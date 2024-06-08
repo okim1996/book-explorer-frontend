@@ -5,7 +5,7 @@ const initialState = {
   books: [],
   pages: 0,
   totalItems: 0,
-  currentPage: 1,
+  currentPage: 0,
   category: "",
   userInput: "",
   noMore: false,
@@ -13,6 +13,7 @@ const initialState = {
   highlightCard: 0,
   hideSticky: false,
   modalIndex: 0,
+  loadingBooks: false,
 };
 
 const booksSlice = createSlice({
@@ -34,6 +35,7 @@ const booksSlice = createSlice({
         highlightCard,
         hideSticky,
         modalIndex,
+        loadingBooks,
       } = action.payload;
       state.books = books;
       state.pages = pages;
@@ -48,6 +50,7 @@ const booksSlice = createSlice({
       state.highlightCard = highlightCard;
       state.hideSticky = hideSticky;
       state.modalIndex = modalIndex;
+      state.loadingBooks = loadingBooks;
     },
   },
 });

@@ -33,9 +33,9 @@ function BookOverlayCard({ index, bookInfo }) {
   const openModal = () => {
     dispatch(setBooks({ ...store, hideSticky: true, modalIndex: index }));
     setIsModalOpen(true);
-    setClicked(false);
   };
   const closeModal = () => {
+    dispatch(setBooks({ ...store, hideSticky: false }));
     setIsModalOpen(false);
   };
   const touchStartHandler = () => {
@@ -52,7 +52,7 @@ function BookOverlayCard({ index, bookInfo }) {
       ref={overlayRef}
       onTouchStart={touchStartHandler}
     >
-      <p className={styles.text}>{bookInfo.volumeInfo.title}</p>
+      <p className={styles.text}>{bookInfo?.volumeInfo?.title}</p>
       <div onClick={openModal} className={styles["button-container"]}>
         <span className={styles.button}>View</span>
       </div>

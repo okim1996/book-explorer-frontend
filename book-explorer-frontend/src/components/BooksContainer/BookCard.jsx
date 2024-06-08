@@ -3,17 +3,39 @@ import Spinner from "../UI/Spinner";
 import styles from "./BookCard.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setBooks } from "../../store/booksSlice";
-import { useEffect } from "react";
-function BookCard({ index, bookInfo, booksLoading }) {
+import { useEffect, useRef, useState } from "react";
+function BookCard({ index, bookInfo }) {
   const store = useSelector((state) => state.books);
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [slideFrom, setSlideFrom] = useState("");
+  const slideRef = useRef();
   const imageLink = store.books[index]?.volumeInfo?.imageLinks?.thumbnail;
-  // useEffect(() => {
-  //   const currentPage = Math.ceil(store.modalIndex + 1 / store.showNum);
-  //   if (currentPage !== store.currentPage) {
-  //     dispatch(setBooks({ ...store, currentPage: currentPage }));
+  // if (slideFrom === "right") {
+  //   if (slideRef.current) {
+  //     slideRef.current.classList.add(styles["slide-from-right"]);
   //   }
-  // }, [store.modalIndex]);
+  // } else {
+  //   if (slideRef.current) {
+  //     slideRef.current.classList.add(styles["slide-from-left"]);
+  //   }
+  // }
+  // useEffect(() => {
+  //   if (slideRef.current) {
+  //     slideRef.current.classList.remove(styles["slide-from-left"]);
+  //     slideRef.current.classList.remove(styles["slide-from-right"]);
+  //   }
+  //   setCurrentPage(store.currentPage);
+  //   if (store.currentPage > currentPage) {
+  //     if (slideRef.current) {
+  //       setSlideFrom("right");
+  //     }
+  //   } else {
+  //     if (slideRef.current) {
+  //       setSlideFrom("left");
+  //     }
+  //   }
+  // }, [store.currentPage]);
   const loadingCard = (
     <div className={styles["book-cell"]}>
       <Spinner></Spinner>
@@ -21,10 +43,11 @@ function BookCard({ index, bookInfo, booksLoading }) {
   );
   return (
     <>
-      {booksLoading ? (
+      {store.loadingBooks ? (
         loadingCard
       ) : (
         <div
+          ref={slideRef}
           className={`${styles["book-cell"]} ${
             store.modalIndex === index ? styles.highlight : ""
           }`}
